@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "email": "akhrorbek20011707@gmail.com",
+        "password": "$2b$10$0POFwjPqXzzagOWsAKpaFOr81NB5TLQ4MSUtd5g07dqDzhnhK4y86",
+        "role": "admin"
+    },
+    {
+        "id": 2,
+        "email": "steven@gmail.com",
+        "password": "$2b$10$n4Bg4cs6.SmbWcOQ1GKSJux54o8Sz4flVEmExFtL4K38KKxLR8Oy6",
+        "role": "user"
+    }
+]

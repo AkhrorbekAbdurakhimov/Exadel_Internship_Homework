@@ -4,7 +4,7 @@ const path = require('path');
 const router = require('express').Router();
 
 const filePath = path.join(process.cwd(), 'database', 'books.json');
-const books = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+const books = fs.readFileSync(filePath, 'utf8') ? JSON.parse(fs.readFileSync(filePath, 'utf8')) : [];
 
 const getAllBooks = (req, res) => {
   res.status(200).send({
