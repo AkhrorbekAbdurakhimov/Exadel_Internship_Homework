@@ -11,4 +11,8 @@ module.exports = {
     sercetKey: process.env.SERCET_KEY,
     expiresIn: process.env.EXPIRES_IN,
   },
+  DB: {
+    MONGODB_URL: process.env.MONGODB_URL,
+    DATABASE_NAME: process.env.DATABASE_NAME,
+  },
 };

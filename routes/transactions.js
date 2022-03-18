@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const Accounts = require('../models/accounts');
+const Transactions = require('../models/transactions');
 
-const getAccounts = async (req, res) => {
+const getTransactions = async (req, res) => {
   try {
-    const result = await Accounts.find();
+    const result = await Transactions.find();
     res.status(200).send({
       data: result,
     });
@@ -16,13 +16,13 @@ const getAccounts = async (req, res) => {
   }
 };
 
-const addAccount = async (req, res) => {
+const addTransactions = async (req, res) => {
   try {
-    const account = await Accounts.create({ ...req.body, userId: req.user._id });
-    if (account) {
+    const transaction = await Transactions.create(req.body);
+    if (transaction) {
       res.status(200).send({
-        message: 'account added successfully',
-        account,
+        message: 'transaction added successfully',
+        transaction,
       });
     }
   } catch (err) {
@@ -33,7 +33,7 @@ const addAccount = async (req, res) => {
   }
 };
 
-router.get('/', getAccounts);
-router.post('/', addAccount);
+router.get('/', getTransactions);
+router.post('/', addTransactions);
 
 module.exports = router;

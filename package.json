@@ -1,5 +1,5 @@
 {
-  "name": "Exadel_Internship_Homework",
+  "name": "budgetify",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -31,7 +31,9 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
+    "mongoose": "^6.2.7",
     "passport": "^0.5.2",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.7.0"
   }
 }
