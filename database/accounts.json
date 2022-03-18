@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "visa",
+        "currency": "dollar",
+        "userId": 2,
+        "description": "for global incomes and expenses",
+        "created_date": "2022-03-15 14:30:09"
+    },
+    {
+        "id": 2,
+        "title": "uzcard",
+        "currency": "sum",
+        "userId": 2,
+        "description": "for local incomes and expenses",
+        "created_date": "2022-03-15 14:31:54"
+    }
+]
