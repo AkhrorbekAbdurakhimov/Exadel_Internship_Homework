@@ -26,6 +26,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/accounts', auth, permissionHandler, accountsRouter);
 app.use('/api/transactions', auth, transactionsRouter);
 
+
 app.listen(APP.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`${APP.ENV} server is running on port ${APP.PORT}`);
