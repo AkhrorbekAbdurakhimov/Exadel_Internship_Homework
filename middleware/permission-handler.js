@@ -1,11 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-
-const filePath = path.join(process.cwd(), 'database', 'users.json');
-const users = fs.readFileSync(filePath, 'utf8') ? JSON.parse(fs.readFileSync(filePath, 'utf8')) : [];
+const users = require('../models/users');
 
 const permissionHandler = (req, res, next) => {
-  const user = users.find((value) => value.email === req.user.email && value.role.toLowerCase() === 'admin');
+  const user = users.findOne({ email: req.user.email, role: 'admin' });
   if (user) {
     next();
   } else {
