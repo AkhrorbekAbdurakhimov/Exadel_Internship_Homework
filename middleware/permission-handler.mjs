@@ -1,4 +1,4 @@
-const users = require('../models/users');
+import users from '../models/users.mjs';
 
 const permissionHandler = (req, res, next) => {
   const user = users.findOne({ email: req.user.email, role: 'admin' });
@@ -11,4 +11,4 @@ const permissionHandler = (req, res, next) => {
   }
 };
 
-module.exports = permissionHandler;
+export default permissionHandler;
