@@ -1,9 +1,10 @@
-const jwt = require('jsonwebtoken');
-const router = require('express').Router();
+import jwt from 'jsonwebtoken';
+import express from 'express';
 
-const Users = require('../models/users');
+import { JWT } from '../config/index.mjs';
+import Users from '../models/users.mjs';
 
-const { JWT } = require('../config');
+const router = express.Router();
 
 const loginUser = async (req, res) => {
   try {
@@ -13,7 +14,6 @@ const loginUser = async (req, res) => {
       res.status(200).send({
         message: 'User successfully logged in',
         token,
-        user,
       });
     } else {
       res.status(401).send({
@@ -31,4 +31,4 @@ const loginUser = async (req, res) => {
 
 router.post('/login', loginUser);
 
-module.exports = router;
+export default router;

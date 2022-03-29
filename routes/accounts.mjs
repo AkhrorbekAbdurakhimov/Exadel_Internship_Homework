@@ -1,6 +1,7 @@
-const router = require('express').Router();
+import express from 'express';
+import Accounts from '../models/accounts.mjs';
 
-const Accounts = require('../models/accounts');
+const router = express.Router();
 
 const getAccounts = async (req, res) => {
   try {
@@ -36,4 +37,4 @@ const addAccount = async (req, res) => {
 router.get('/', getAccounts);
 router.post('/', addAccount);
 
-module.exports = router;
+export default router;

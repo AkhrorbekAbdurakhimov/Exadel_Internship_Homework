@@ -1,6 +1,7 @@
-const router = require('express').Router();
+import express from 'express';
+import Transactions from '../models/transactions.mjs';
 
-const Transactions = require('../models/transactions');
+const router = express.Router();
 
 const getTransactions = async (req, res) => {
   try {
@@ -36,4 +37,4 @@ const addTransactions = async (req, res) => {
 router.get('/', getTransactions);
 router.post('/', addTransactions);
 
-module.exports = router;
+export default router;
