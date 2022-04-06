@@ -65,5 +65,10 @@
     .success {
       color: green;
     }
+
+    .disabled {
+      cursor: not-allowed;
+      background-color: rgba(143, 152, 207, 0.75);
+    }
   }
 }

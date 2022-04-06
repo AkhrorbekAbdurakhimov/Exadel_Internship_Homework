@@ -3,9 +3,9 @@
     <h3 class="login-form-header">Budgetify</h3>
     <form class="login-form__wrapper" (ngSubmit)="onLogin()" [formGroup]="loginForm" name="loginForm">
       <mat-form-field appearance="outline">
-        <input formControlName="email" placeholder="Email" matInput required>
+        <input formControlName="email" placeholder="Email" email="true" matInput required>
         <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
-        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email is invalid</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email') || loginForm.get('email')?.hasError('pattern')">Please enter a valid email address</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <input formControlName="password" placeholder="Password" matInput [type]="hide ? 'password' : 'text'" required>
@@ -18,7 +18,12 @@
         </button>
         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
       </mat-form-field>
-      <button class="submit-btn" type="submit" mat-flat-button color="primary">Login</button>
+      <button
+        class="submit-btn"
+        type="submit"
+        [ngClass]="{disabled: !loginForm.valid}"
+        mat-flat-button color="primary"
+      >Login</button>
       <p class="status-message" [ngClass]="{success: isLoggedIn}">{{statusMessage}}</p>
     </form>
   </div>
