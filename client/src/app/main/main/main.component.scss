@@ -1,0 +1,24 @@
+.container {
+  border: 1px solid red;
+  padding: 30px;
+  height: 100vh;
+  background: #EFEFEF;
+
+  .wrapper {
+    border: 1px solid red;
+    display: flex;
+    height: calc(100% - 50px);
+
+    app-accounts-sidebar {
+      width: 25%;
+    }
+
+    app-transactions-part {
+      width: 55%;
+    }
+
+    app-right-sidebar {
+      width: 20%;
+    }
+  }
+}
