@@ -1,4 +1,4 @@
-import config from './../../config/app.config';
+import { environment } from './../../../environments/environment';
 
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -14,7 +14,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post<any>(`${config.APP.BASE_URL}/api/auth/login`, {
+      .post<any>(`${environment.apiUrl}/api/auth/login`, {
         email,
         password
       })
@@ -24,6 +24,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
   isLoggedIn() {

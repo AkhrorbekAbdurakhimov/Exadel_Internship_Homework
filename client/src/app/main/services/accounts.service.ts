@@ -1,4 +1,4 @@
-import config from './../../config/app.config';
+import { environment } from 'src/environments/environment';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +13,6 @@ export class AccountsService {
 
   getAccounts() {
     return this.http
-      .get<any>(`${config.APP.BASE_URL}/api/accounts`)
+      .get<any>(`${environment.apiUrl}/api/accounts`)
   }
 }

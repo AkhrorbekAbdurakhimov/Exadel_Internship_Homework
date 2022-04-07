@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login-form.component.scss']
 })
 
-export class LoginFormComponent {
+export class LoginFormComponent  {
   hide: boolean = false;
   isLoggedIn: boolean = false;
   statusMessage: string = '';
