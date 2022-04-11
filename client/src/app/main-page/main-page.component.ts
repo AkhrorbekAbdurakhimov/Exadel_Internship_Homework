@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SpinnerService } from '../global-components/services/spinner.service';
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class MainPageComponent implements OnInit {
-  constructor( ) { }
+  isSpinnerVisible: boolean = true;
+  constructor(
+    private spinnerService: SpinnerService,
+  ) { }
 
   ngOnInit(): void {
+    this.spinnerService.getIsSpinnerVisible$().subscribe((value: boolean) => {
+      this.isSpinnerVisible = !value;
+    });
   }
 }

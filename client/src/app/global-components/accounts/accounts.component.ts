@@ -1,10 +1,10 @@
-import { DOCUMENT } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Account } from './account.model';
 import { Currency } from './currency.modal';
 
+import { DataService } from '../services/data.service';
 import { AccountsService } from '../services/accounts.service';
 import { CurrenciesService } from '../services/currencies.service';
 
@@ -17,8 +17,9 @@ import { CurrenciesService } from '../services/currencies.service';
 export class AccountsComponent implements OnInit{
 
   account: any = {};
-  accounts!: Account[];
-  currencies!: Currency[];
+  accountId!: number;
+  accounts: Account[] = [];
+  currencies: Currency[] = [];
   isOpenAddAccountModal: boolean = false;
   isOpenViewAccountModal: boolean = false;
   isCreateAccountError: boolean = false;
@@ -34,6 +35,7 @@ export class AccountsComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
+    private dataservice: DataService,
     private accountsService: AccountsService,
     private currenciesService: CurrenciesService,
   ) { }
@@ -41,12 +43,16 @@ export class AccountsComponent implements OnInit{
   ngOnInit() {
     this.getAccounts();
     this.getCurrencies();
+    this.dataservice.currentaccountModalStatus.subscribe((status) => this.isOpenAddAccountModal = status)
   }
 
   getAccounts() {
     this.accountsService.getAccounts().subscribe({
       next: data => {
         this.accounts = data.accounts;
+        this.accounts.forEach(account => {
+          if (account.isSelected) this.dataservice.sendAccountId(account.id);
+        })
       }
     })
   }
@@ -62,7 +68,8 @@ export class AccountsComponent implements OnInit{
   getAccount(id: number) {
     this.accountsService.getAccount(id).subscribe({
       next: data => {
-        this.account = data.account
+        this.account = data.account;
+        this.dataservice.sendAccountId(data.account.id);
       }
     })
   }

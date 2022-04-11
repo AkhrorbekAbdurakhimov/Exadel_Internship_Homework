@@ -7,11 +7,13 @@ import { SharedModule } from '../shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 import { AccountsComponent } from './accounts/accounts.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    AccountsComponent
+    SpinnerComponent,
+    AccountsComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { AccountsComponent } from './accounts/accounts.component';
   ],
   exports: [
     HeaderComponent,
-    AccountsComponent
+    SpinnerComponent,
+    AccountsComponent,
   ]
 })
 

@@ -18,7 +18,7 @@ export class AccountsService {
 
   getAccount(id: number) {
     return this.http
-      .get<any>(`${environment.apiUrl}/api/accounts/${id}`)
+      .get<any>(`${environment.apiUrl}/api/accounts/${id}`);
   }
 
   addAccount(title: string, currencyId: number, description: string) {

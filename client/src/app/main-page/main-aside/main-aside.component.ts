@@ -13,7 +13,7 @@ import { DataService } from 'src/app/global-components/services/data.service';
 
 export class MainAsideComponent implements OnInit {
   accountId!: number;
-  transactions!: Transaction[];
+  transactions: Transaction[] = [];
 
   constructor(
     private dataservice: DataService,

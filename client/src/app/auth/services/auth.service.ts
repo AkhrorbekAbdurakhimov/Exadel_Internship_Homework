@@ -4,6 +4,8 @@ import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { User } from './user.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,6 +32,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  getUser(): User {
+    return JSON.parse(localStorage.getItem('currentUser') || '{}');
+  }
+
   isLoggedIn() {
     const token = localStorage.getItem('token')
     if (token) return true
@@ -37,7 +43,7 @@ export class AuthService {
   }
 
   private setToken(res: any) {
-    localStorage.setItem('user', res.user);
+    localStorage.setItem('user', JSON.stringify(res.user));
     localStorage.setItem('token', res.token);
   }
 }
