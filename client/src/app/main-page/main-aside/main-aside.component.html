@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="transactions-wrapper">
+    <form class="search-form">
+      <div class="search-wrapper">
+        <input type="search" placeholder="Search">
+        <mat-icon class="search-icon">search</mat-icon>
+      </div>
+      <div class="filter-wrapper">
+        <mat-icon class="filter-icon">filter_list</mat-icon>
+        <span>Transactions date</span>
+      </div>
+    </form>
+    <ul class="transactions-list">
+      <p class="no-transactions" [ngClass]="{'no-transactions-active': !transactions.length}">No transactions added yet</p>
+      <li class="transactions-list_item" *ngFor="let transaction of transactions;">
+        <span class="category-name">{{transaction.categoryname}}</span>
+        <div class="details">
+          <h4 class="title">{{transaction.title}}</h4>
+          <div class="details-wrapper">
+            <span class="icon-wrapper" [ngClass]="{red: transaction.type === 'expense'}">
+              <mat-icon class="category-icon">{{transaction.type === 'income' ? 'arrow_downward' : 'arrow_upward'}}</mat-icon>
+            </span>
+            <h4 class="category">{{transaction.type}}</h4>
+            <span class="dot"></span>
+            <p class="date">{{transaction.date}}</p>
+          </div>
+        </div>
+        <p class="amount" [ngClass]="{'red-amount': transaction.type === 'expense'}">
+          {{transaction.type === 'income' ? '' : '- '}}
+          {{transaction.amount}} {{transaction.currency}}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="right-sidebar-wrapper">
+    <div class="wrapper">
+      <div class="top-wrapper">
+        <div class="income-category">
+          <div class="icon-wrapper">
+            <mat-icon class="expense-icon">arrow_downward</mat-icon>
+          </div>
+          <span class="title">Income</span>
+        </div>
+        <div class="expense-category">
+          <div class="icon-wrapper">
+            <mat-icon class="expense-icon">arrow_upward</mat-icon>
+          </div>
+          <span class="title">Expenses</span>
+        </div>
+        <div class="add-transaction">
+          <div class="icon-wrapper">
+            <mat-icon class="plus-icon">add</mat-icon>
+          </div>
+          <span class="title">Add Transaction</span>
+        </div>
+        <div class="add-account" (click)="openAddAccountModal()">
+          <div class="icon-wrapper">
+            <mat-icon class="plus-icon">add</mat-icon>
+          </div>
+          <span class="title">Add Account</span>
+        </div>
+      </div>
+      <!-- <div class="bottom-wrapper">
+        <div class="add-piggy-bank">
+          <img src="./../../../assets/piggy-bank.svg" alt="piggy-bank" class="piggy-bank" width="35px">
+          <span>Add Piggy Bank</span>
+        </div>
+        <ul class="piggy-bank-list">
+          <li class="piggy-bank-item">
+            <span></span>
+          </li>
+        </ul>
+      </div> -->
+    </div>
+  </div>
+</div>
+
