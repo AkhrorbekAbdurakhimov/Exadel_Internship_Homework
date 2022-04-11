@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   private setToken(res: any) {
-    localStorage.setItem('user', res.user)
-    localStorage.setItem('token', res.token)
+    localStorage.setItem('user', res.user);
+    localStorage.setItem('token', res.token);
   }
 }
