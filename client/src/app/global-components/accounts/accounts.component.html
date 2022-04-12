@@ -1,13 +1,13 @@
 <div class="container">
   <ul class="accounts-list">
     <p
-      [ngClass]="{active: !accounts.length}"
+      [class.active]="!accounts.length"
     >
       No accounts added yet
     </p>
     <li
       class="accounts-list_item"
-      [ngClass]="{selected: account.isSelected}"
+      [class.selected]="account.isSelected"
       (click)="openViewAccountModal(account.id)"
       *ngFor="let account of accounts; let i = index;"
     >
@@ -16,7 +16,7 @@
       <span class="sign">{{account.currency}}</span>
     </li>
   </ul>
-  <div class="add-account" [ngClass]="{active: !accounts.length}" (click)="openAddAccountModal()">
+  <div class="add-account" [class.active]="!accounts.length" (click)="openAddAccountModal()">
     <button>
       <mat-icon>add</mat-icon>
     </button>
@@ -24,8 +24,8 @@
   </div>
 </div>
 
-<div class="view-account-modal-container" [ngClass]="{'view-account-modal-container-active': isOpenViewAccountModal}">
-  <div class="view-account" [ngClass]="{active: isOpenViewAccountModal}">
+<div class="view-account-modal-container" [class.view-account-modal-container-active]="isOpenViewAccountModal">
+  <div class="view-account" [class.active]="isOpenViewAccountModal">
     <div class="view-account_header">
       <span>Account Information</span>
       <button class="edit-btn">
@@ -59,7 +59,7 @@
   </div>
 </div>
 
-<div class="add-account-modal-container" [ngClass]="{'add-account-modal-container-active': isOpenAddAccountModal}">
+<div class="add-account-modal-container" [class.add-account-modal-container-active]="isOpenAddAccountModal">
   <div class="add-account-modal">
     <div class="add-account-modal_header">
       <h1>Create Account</h1>
@@ -101,20 +101,20 @@
           <textarea
             formControlName="description"
             name="description"
-            [ngClass]="{errorDescription: addAccountForm.get('description')?.hasError('maxlength')}"
+            [ngClass]="{'error-description': addAccountForm.get('description')?.hasError('maxlength')}"
           ></textarea>
           <mat-error *ngIf="addAccountForm.get('description')?.hasError('maxlength')">Maximum number of characters reached</mat-error>
         </div>
-        <p class="create-account-error" [ngClass]="{'active': isCreateAccountError}">{{createAccountErrorMessage}}</p>
+        <p class="create-account-error" [class.active]="isCreateAccountError">{{createAccountErrorMessage}}</p>
         <div class="buttons-wrapper">
           <button class="cancel-btn" (click)="closeAddAccountModal()">Cancel</button>
-          <button class="save-btn" type="submit" [ngClass]="{disabled: !addAccountForm.valid}">Save</button>
+          <button class="save-btn" type="submit" [class.disabled]="!addAccountForm.valid">Save</button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<div class="toaster-message" [ngClass]="{'toaster-message-active': toasterMessageStatus}">
+<div class="toaster-message" [class.toaster-message-active]="toasterMessageStatus">
   <p>Account created successfully</p>
 </div>

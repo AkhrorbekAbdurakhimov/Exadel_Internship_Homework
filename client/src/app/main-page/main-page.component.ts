@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { SpinnerService } from '../global-components/services/spinner.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -15,8 +17,11 @@ export class MainPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.spinnerService.getIsSpinnerVisible$().subscribe((value: boolean) => {
-      this.isSpinnerVisible = !value;
-    });
+    this.spinnerService
+      .getIsSpinnerVisible$()
+      .pipe(untilDestroyed(this))
+      .subscribe((value: boolean) => {
+        this.isSpinnerVisible = !value;
+      });
   }
 }

@@ -7,5 +7,6 @@ export class Transaction {
     public date: Date,
     public categoryname: string,
     public currency: string,
+    public description: string
   ) {}
 }

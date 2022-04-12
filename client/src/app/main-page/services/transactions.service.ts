@@ -15,4 +15,9 @@ export class TransactionsService {
     return this.http
       .get<any>(`${environment.apiUrl}/api/transactions/${accountId}`)
   }
+
+  getTransaction(transactionId: number) {
+    return this.http
+      .get<any>(`${environment.apiUrl}/api/transactions/transaction/${transactionId}`)
+  }
 }

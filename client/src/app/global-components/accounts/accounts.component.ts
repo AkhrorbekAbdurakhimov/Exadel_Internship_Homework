@@ -1,5 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { Account } from './account.model';
 import { Currency } from './currency.modal';
@@ -8,6 +9,7 @@ import { DataService } from '../services/data.service';
 import { AccountsService } from '../services/accounts.service';
 import { CurrenciesService } from '../services/currencies.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
@@ -43,35 +45,47 @@ export class AccountsComponent implements OnInit{
   ngOnInit() {
     this.getAccounts();
     this.getCurrencies();
-    this.dataservice.currentaccountModalStatus.subscribe((status) => this.isOpenAddAccountModal = status)
+    this.dataservice
+      .currentaccountModalStatus
+      .pipe(untilDestroyed(this))
+      .subscribe((status) => this.isOpenAddAccountModal = status)
   }
 
   getAccounts() {
-    this.accountsService.getAccounts().subscribe({
-      next: data => {
-        this.accounts = data.accounts;
-        this.accounts.forEach(account => {
-          if (account.isSelected) this.dataservice.sendAccountId(account.id);
-        })
-      }
-    })
+    this.accountsService
+      .getAccounts()
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: data => {
+          this.accounts = data.accounts;
+          this.accounts.forEach(account => {
+            if (account.isSelected) this.dataservice.sendAccountId(account.id);
+          })
+        }
+      })
   }
 
   getCurrencies() {
-    this.currenciesService.getCurrencies().subscribe({
-      next: data => {
-        this.currencies = data.currencies;
-      }
-    })
+    this.currenciesService
+      .getCurrencies()
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: data => {
+          this.currencies = data.currencies;
+        }
+      })
   }
 
   getAccount(id: number) {
-    this.accountsService.getAccount(id).subscribe({
-      next: data => {
-        this.account = data.account;
-        this.dataservice.sendAccountId(data.account.id);
-      }
-    })
+    this.accountsService
+      .getAccount(id)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: data => {
+          this.account = data.account;
+          this.dataservice.sendAccountId(data.account.id);
+        }
+      })
   }
 
   openViewAccountModal(accountId: number) {
@@ -99,20 +113,23 @@ export class AccountsComponent implements OnInit{
   addAccount() {
     if (this.addAccountForm.valid) {
       const { title, currency: currencyId, description } = this.addAccountForm.value;
-      this.accountsService.createAccount(title, currencyId, description).subscribe({
-        next: data => {
-          this.isOpenAddAccountModal = false;
-          this.accounts.push(data.account);
-          this.toasterMessageStatus = true;
-          setTimeout(() => {
-            this.toasterMessageStatus = false;
-          }, 5000)
-        },
-        error: error => {
-          this.isCreateAccountError = true;
-          this.createAccountErrorMessage = error.error.message;
-        }
-      })
+      this.accountsService
+        .createAccount(title, currencyId, description)
+        .pipe(untilDestroyed(this))
+        .subscribe({
+          next: data => {
+            this.isOpenAddAccountModal = false;
+            this.accounts.push(data.account);
+            this.toasterMessageStatus = true;
+            setTimeout(() => {
+              this.toasterMessageStatus = false;
+            }, 5000)
+          },
+          error: error => {
+            this.isCreateAccountError = true;
+            this.createAccountErrorMessage = error.error.message;
+          }
+        })
     }
   }
 }

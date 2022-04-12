@@ -11,13 +11,13 @@
       </div>
     </form>
     <ul class="transactions-list">
-      <p class="no-transactions" [ngClass]="{'no-transactions-active': !transactions.length}">No transactions added yet</p>
-      <li class="transactions-list_item" *ngFor="let transaction of transactions;">
+      <p class="no-transactions" [class.no-transactions-active]="!transactions.length">No transactions added yet</p>
+      <li class="transactions-list_item" *ngFor="let transaction of transactions;" (click)="openViewTransactionModal(transaction.id)">
         <span class="category-name">{{transaction.categoryname}}</span>
         <div class="details">
           <h4 class="title">{{transaction.title}}</h4>
           <div class="details-wrapper">
-            <span class="icon-wrapper" [ngClass]="{red: transaction.type === 'expense'}">
+            <span class="icon-wrapper" [class.red]="transaction.type === 'expense'">
               <mat-icon class="category-icon">{{transaction.type === 'income' ? 'arrow_downward' : 'arrow_upward'}}</mat-icon>
             </span>
             <h4 class="category">{{transaction.type}}</h4>
@@ -25,7 +25,7 @@
             <p class="date">{{transaction.date}}</p>
           </div>
         </div>
-        <p class="amount" [ngClass]="{'red-amount': transaction.type === 'expense'}">
+        <p class="amount" [class.red-amount]="transaction.type === 'expense'">
           {{transaction.type === 'income' ? '' : '- '}}
           {{transaction.amount}} {{transaction.currency}}
         </p>
@@ -75,3 +75,51 @@
   </div>
 </div>
 
+<div class="view-transaction-modal-container" [class.view-transaction-modal-container-active]="isViewTransactionModel">
+  <div class="view-transaction" [class.active]="isViewTransactionModel">
+    <div class="view-transaction_header">
+      <span>Transaction Information</span>
+      <button class="edit-btn">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="delete-btn">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="close-btn" (click)="closeViewTransactionModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="view-transaction_body">
+      <div class="top">
+        <span class="top-icon-wrappper"
+          [ngStyle]="{'background-color': currentTransaction && currentTransaction.type === 'expense' ? 'red' : 'green'}"
+        >
+          <mat-icon>
+            {{currentTransaction && currentTransaction.type === 'expense' ? 'arrow_upward' : 'arrow_downward'}}
+          </mat-icon>
+        </span>
+        <span class="type">{{currentTransaction && currentTransaction.type ? currentTransaction.type : ''}}</span>
+        <span class="amount">
+          {{currentTransaction && currentTransaction.type === 'expense' ? ' - ' : ''}}
+          {{currentTransaction && currentTransaction.amount ? currentTransaction.amount : ''}}
+          {{currentTransaction && currentTransaction.currency ? currentTransaction.currency : ''}}
+        </span>
+      </div>
+      <p class="transaction-title">{{currentTransaction && currentTransaction.title ? currentTransaction.title : ''}}</p>
+      <button class="category">{{currentTransaction && currentTransaction.categoryname ? currentTransaction.categoryname : ''}}</button>
+      <div class="details-wrapper">
+        <div class="details-wrapper_item">
+          <span>Payment Date:</span>
+          <span>{{currentTransaction && currentTransaction.date ? currentTransaction.date : ''}}</span>
+        </div>
+        <div class="details-wrapper_item">
+          <span>Description:</span>
+          <span>{{currentTransaction && currentTransaction.description ? currentTransaction.description : ''}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="view-transaction_footer">
+      <button (click)="closeViewTransactionModal()">close</button>
+    </div>
+  </div>
+</div>

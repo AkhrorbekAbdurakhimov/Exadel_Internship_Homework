@@ -9,11 +9,11 @@
     height: calc(100% - 50px);
 
     app-accounts {
-      width: 25%;
+      flex: 1;
     }
 
     app-main-aside {
-      width: 75%;
+      flex: 3;
     }
   }
 }
