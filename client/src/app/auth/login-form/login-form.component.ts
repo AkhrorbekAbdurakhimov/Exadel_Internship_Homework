@@ -11,9 +11,9 @@ import { AuthService } from '../services/auth.service';
 })
 
 export class LoginFormComponent  {
-  hide: boolean = false;
-  isLoggedIn: boolean = false;
+  hide: boolean = true;
   statusMessage: string = '';
+  isLoggedIn: boolean = false;
   loginForm  = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
     password: ['', [Validators.required]]

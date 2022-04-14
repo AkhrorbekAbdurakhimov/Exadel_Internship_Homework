@@ -1,0 +1,19 @@
+.container {
+  padding: 30px;
+  height: 100vh;
+  background: #EFEFEF;
+  position: relative;
+
+  .wrapper {
+    display: flex;
+    height: calc(100% - 50px);
+
+    app-accounts {
+      flex: 1;
+    }
+
+    app-main-aside {
+      flex: 3;
+    }
+  }
+}
