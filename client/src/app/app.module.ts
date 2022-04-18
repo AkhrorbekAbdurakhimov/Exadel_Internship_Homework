@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MainPageModule } from './main-page/main-page.module';
+import { CategoriesPageModule } from './categories-page/categories-page.module';
 
 import { AuthInterceptor } from './auth/auth.interceptor';
 
@@ -23,11 +24,14 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     MainPageModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CategoriesPageModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class AppModule { }

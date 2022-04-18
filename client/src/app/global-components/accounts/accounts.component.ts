@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { Account } from './account.model';
-import { Currency } from './currency.modal';
+import { Account } from '../models/account.model';
+import { Currency } from './../models/currency.modal';
 
 import { DataService } from '../services/data.service';
 import { AccountsService } from '../services/accounts.service';
@@ -58,6 +58,7 @@ export class AccountsComponent implements OnInit{
       .subscribe({
         next: data => {
           this.accounts = data.accounts;
+          this.dataservice.sendAccounts(data.accounts);
           this.accounts.forEach(account => {
             if (account.isSelected) this.dataservice.sendAccountId(account.id);
           })

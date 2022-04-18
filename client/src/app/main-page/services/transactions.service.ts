@@ -20,4 +20,17 @@ export class TransactionsService {
     return this.http
       .get<any>(`${environment.apiUrl}/api/transactions/transaction/${transactionId}`)
   }
+
+  addTransaction(accountId: number, type: string, categoryIds: number[], title: string, amount: number, date: string, description: any = null) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/api/transactions`, {
+        accountId,
+        type,
+        categoryIds,
+        title,
+        amount,
+        date,
+        description
+      })
+  }
 }

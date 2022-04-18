@@ -251,6 +251,23 @@
         }
       }
 
+      .add-transaction-disable {
+        cursor: not-allowed;
+
+        &:hover {
+          pointer-events: none;
+          cursor: none;
+        }
+      }
+
+      .add-account {
+        display: none;
+      }
+
+      .add-account-active {
+        display: flex;
+      }
+
       .hide {
         display: none;
       }
@@ -405,6 +422,7 @@
         line-height: 26px;
         text-align: center;
         color: #373737;
+        margin-right: 15px;
       }
 
       .details-wrapper {
@@ -474,4 +492,215 @@
   to {
     transform: translateX(0);
   }
+}
+
+.add-transaction-modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.433);
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  .add-transaction-modal {
+    z-index: 11;
+    width: 500px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding-top: 10px;
+
+    &_header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      h1 {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 41px;
+        color: #373737;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 8px;
+        right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+    }
+
+    &_body {
+      padding: 20px 15px;
+
+      input, select, textarea {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        color: #373737;
+        outline: none;
+        border-radius: 4px;
+        padding: 2px 4px;
+        background-color: #F1EEEE;
+        box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.182);
+      }
+
+      .form-group {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 30px;
+        color: #373737;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .form-group:first-child {
+
+        label {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          margin-right: 10px;
+
+          span {
+            margin-left: 5px;
+          }
+
+          input {
+            box-shadow: none;
+          }
+        }
+
+        ng-multiselect-dropdown {
+          flex: 6;
+        }
+      }
+
+      .title {
+        label {
+          margin-right: auto;
+        }
+
+        input {
+          width: 400px;
+        }
+      }
+
+      mat-error {
+        font-family: 'Alata';
+        margin: 5px 0;
+      }
+
+      .error-input {
+        border: 2px solid red;
+      }
+
+      .error-description {
+        border: 2px solid red;
+      }
+
+      .amount, .date {
+        label {
+          margin-right: 15px;
+        }
+
+        input {
+          width: 150px;
+        }
+      }
+
+      .description {
+        align-items: start;
+
+
+        label {
+          margin-right: auto;
+        }
+
+        textarea {
+          resize: none;
+          width: 340px;
+          height: 100px;
+        }
+      }
+
+      .buttons-wrapper {
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        button {
+          background: none;
+          border: none;
+          padding: 8px 15px;
+          font-family: 'Alata';
+          color: #fff;
+          font-size: 18px;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+
+        .save-btn {
+          margin-left: 20px;
+          background-color: green;
+        }
+
+        .disabled {
+          cursor: not-allowed;
+          background-color: rgb(0, 128, 0, 0.5);
+        }
+
+        .cancel-btn {
+          background-color: red;
+        }
+      }
+
+    }
+  }
+}
+
+.add-transaction-modal-container-active {
+  display: flex;
+}
+
+.toaster-message {
+  background-color: #fff;
+  width: 500px;
+  border-radius: 5px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 15px;
+  font-size: 20px;
+  background-color: green;
+  color: white;
+  font-family: 'Alata';
+  transform: translateX(calc(100% + 20px));
+  transition: transform 1s ease;
+  z-index: 9999;
+}
+
+.toaster-message-warning {
+  background-color: #F7B217;
+}
+
+.toaster-message-active {
+  transform: translate(0);
+  transition: transform 1s ease;
 }

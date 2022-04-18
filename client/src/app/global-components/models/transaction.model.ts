@@ -1,3 +1,5 @@
+import { Category } from "./category.model";
+
 export class Transaction {
   constructor(
     public id: number,
@@ -5,7 +7,7 @@ export class Transaction {
     public type: string,
     public amount: number,
     public date: Date,
-    public categoryname: string,
+    public categories: Category[],
     public currency: string,
     public description: string
   ) {}

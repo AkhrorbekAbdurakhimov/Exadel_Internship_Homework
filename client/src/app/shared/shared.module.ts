@@ -7,10 +7,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
+
 @NgModule({
   declarations: [],
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatProgressSpinnerModule],
-  exports: [MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatProgressSpinnerModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule
+  ],
+  exports: [
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule
+  ],
 })
 
 export class SharedModule { }

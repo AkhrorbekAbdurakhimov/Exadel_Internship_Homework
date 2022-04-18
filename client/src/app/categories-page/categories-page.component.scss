@@ -1,0 +1,153 @@
+.container {
+  padding: 30px;
+  height: 100vh;
+  background: #EFEFEF;
+  position: relative;
+
+  .wrapper {
+    display: flex;
+    height: calc(100% - 50px);
+
+    .categories-wrapper {
+      flex: 8;
+      padding-top: 30px;
+
+      .search-wrapper {
+        position: relative;
+
+        input {
+          width: 40%;
+          height: 45px;
+          outline: none;
+          font-size: 20px;
+          background: #F9F9F9;
+          font-family: 'Alata';
+          border-radius: 10px;
+          padding-left: 40px;
+        }
+
+        .search-icon {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 10px;
+        }
+      }
+
+      .categories-list {
+        margin-top: 20px;
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .categories-item {
+          display: flex;
+          padding: 6px 14px;
+          font-family: 'Space Grotesk';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 17.5px;
+          line-height: 24px;
+          align-items: center;
+          margin-bottom: 20px;
+          background: #ECEDED;
+          border: 2px solid #21C206;
+          border-radius: 10px;
+          margin-right: 18px;
+        }
+
+        .border-red {
+          border: 2px solid #EE3F19;
+        }
+
+        mat-icon {
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .categories-filter-wrapper {
+      flex: 2;
+      padding-top: 30px;
+
+      .income-category, .expense-category, .add-category {
+        color: pointer;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        width: 250px;
+        margin-left: auto;
+        padding: 12px;
+        border: 2px solid transparent;
+
+        &:hover {
+          border: 2px solid #000;
+          transition: all 1s ease;
+          cursor: pointer;
+        }
+
+        .icon-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 3px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+
+        .title {
+          font-family: 'Space Grotesk';
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 26px;
+        }
+      }
+
+      .income-category, .expense-category {
+        background: #F9F9F9;
+        margin-bottom: 15px;
+
+        .icon-wrapper {
+
+          mat-icon {
+            color: #fff;
+          }
+        }
+
+        .title {
+          color: #373737;
+        }
+      }
+
+      .income-category {
+        .icon-wrapper {
+          background-color: green;
+        }
+      }
+
+      .expense-category {
+        .icon-wrapper {
+          background-color: red;
+        }
+      }
+
+      .add-category {
+        background: #B9E2E6;
+
+        .icon-wrapper {
+          background-color: #fff;
+
+          mat-icon {
+            color: #86C9CF;
+          }
+        }
+
+        .title {
+          color: #373737;
+        }
+      }
+    }
+  }
+}
