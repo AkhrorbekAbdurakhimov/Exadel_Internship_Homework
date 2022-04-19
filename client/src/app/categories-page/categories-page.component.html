@@ -3,7 +3,7 @@
   <div class="wrapper">
     <div class="categories-wrapper">
       <div class="search-wrapper">
-        <input type="search" placeholder="Search">
+        <input type="search" placeholder="Search" #searchInput (keyup)="searchCategory(searchInput.value)">
         <mat-icon class="search-icon">search</mat-icon>
       </div>
       <ul class="categories-list">
@@ -14,29 +14,127 @@
         >
           <span>{{category.title}}</span>
           <mat-icon>edit</mat-icon>
-          <mat-icon>delete</mat-icon>
+          <mat-icon
+            (click)="openVerifyModal(
+              category.id,
+              'Delete Transaction',
+              'Are you sure you want to delete transaction?'
+            )"
+          >delete</mat-icon>
         </li>
       </ul>
     </div>
     <div class="categories-filter-wrapper">
-      <div class="income-category">
+      <div class="income-category active" (click)="filterCategory('income')" [class.active]="isActiveIncomeCategories">
         <div class="icon-wrapper">
           <mat-icon class="expense-icon">arrow_downward</mat-icon>
         </div>
         <span class="title">Income</span>
       </div>
-      <div class="expense-category">
+      <div class="expense-category" (click)="filterCategory('expense')" [class.active]="isActiveExpenseCategories">
         <div class="icon-wrapper">
           <mat-icon class="expense-icon">arrow_upward</mat-icon>
         </div>
         <span class="title">Expenses</span>
       </div>
-      <div class="add-category">
+      <div class="add-category" (click)="openAddCategoryModal()">
         <div class="icon-wrapper">
           <mat-icon class="add-icon">add</mat-icon>
         </div>
         <span class="title">Add Category</span>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="add-category-modal-container" [class.add-category-modal-container-active]="isOpenAddCategoryModal">
+  <div class="add-category-modal">
+    <div class="add-category-modal_header">
+      <h1>Add Category</h1>
+      <button class="close-btn" (click)="closeAddCategoryModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="add-category-modal_body">
+      <form
+        class="add-category-modal_form"
+        (ngSubmit)="addCategory()"
+        [formGroup]="addCategoryForm"
+        name="addCategoryForm"
+      >
+        <div class="form-group-checkbox">
+          <label [ngClass]="{active: addCategoryForm.value.categoryType === 'expense'}">
+            <input
+              type="radio"
+              name="categoryType"
+              formControlName="categoryType"
+              value="expense"
+            >
+            <div class="checkbox-body">
+              <span>
+                <mat-icon>arrow_upward</mat-icon>
+              </span>
+              <span>Expenses</span>
+            </div>
+          </label>
+          <label [ngClass]="{active: addCategoryForm.value.categoryType === 'income'}">
+            <input
+              type="radio"
+              name="categoryType"
+              formControlName="categoryType"
+              value="income"
+            >
+            <div class="checkbox-body">
+              <span style="background-color: green">
+                <mat-icon>arrow_downward</mat-icon>
+              </span>
+              <span>Income</span>
+            </div>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Title *</label>
+          <input
+            type="text"
+            formControlName="title"
+            name="title"
+            [ngClass]="{errorInput: addCategoryForm.get('title')?.hasError('required') || addCategoryForm.get('title')?.hasError('maxlength')}"
+          >
+          <mat-error *ngIf="addCategoryForm.get('title')?.hasError('required')">Title is required</mat-error>
+          <mat-error *ngIf="addCategoryForm.get('title')?.hasError('maxlength')">Maximum number of characters reached</mat-error>
+        </div>
+        <p class="add-category-error" [class.active]="isAddCategoryError">{{addCategoryErrorMessage}}</p>
+        <div class="buttons-wrapper">
+          <button class="cancel-btn" (click)="closeAddCategoryModal()">Cancel</button>
+          <button class="save-btn" type="submit" [class.disabled]="!addCategoryForm.valid">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="toaster-message"
+  [class.toaster-message-active]="toasterMessageStatus"
+  [class.toaster-message-warning]="isWarning"
+>
+  <p>{{toasterMessage}}</p>
+</div>
+
+<div class="verify-modal-container" [class.verify-modal-container-active]="verifyModalStatus">
+  <div class="verify-modal">
+    <div class="header">
+      <h1>{{verifyTitle}}</h1>
+      <button class="close-btn" (click)="closeVerifyModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="body">
+      <span>{{verifyMessage}}</span>
+    </div>
+    <div class="footer">
+      <button class="verify-btn" (click)="deleteCategory()">Yes</button>
+      <button class="cancel-btn" (click)="closeVerifyModal()">No</button>
     </div>
   </div>
 </div>

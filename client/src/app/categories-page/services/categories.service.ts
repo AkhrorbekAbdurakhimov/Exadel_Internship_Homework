@@ -17,4 +17,17 @@ export class CategoriesService {
     return this.http
       .get<any>(`${environment.apiUrl}/api/categories${type ? `?type=${type}` : ''}`)
   }
+
+  addCategory(type: string, title: string) {
+    return this.http
+      .post<any>(`${environment.apiUrl}/api/categories`, {
+        type,
+        title
+      })
+  }
+
+  deleteCategory(categoryId: number) {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/api/categories/${categoryId}`)
+  }
 }
