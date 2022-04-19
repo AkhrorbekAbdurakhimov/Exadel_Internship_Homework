@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -47,7 +46,7 @@ export class MainAsideComponent implements OnInit {
 
   transactionForm = this.fb.group({
     transactionType: ['income'],
-    categories: ["", [Validators.required]],
+    categories: [this.categories, [Validators.required]],
     title: ["", [Validators.required, Validators.maxLength(128)]],
     amount: ["", [Validators.required]],
     date: [""],
@@ -55,7 +54,6 @@ export class MainAsideComponent implements OnInit {
   })
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
     private dataservice: DataService,
     private categoryService: CategoriesService,

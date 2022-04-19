@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CurrenciesService } from './currencies.service';
 
@@ -6,7 +7,9 @@ describe('CurrenciesService', () => {
   let service: CurrenciesService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
     service = TestBed.inject(CurrenciesService);
   });
 
