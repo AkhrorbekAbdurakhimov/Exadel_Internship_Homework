@@ -73,7 +73,6 @@ export class MainAsideComponent implements OnInit {
       .accounts
       .pipe(untilDestroyed(this))
       .subscribe((accounts) => {
-        console.log(accounts);
         if (!accounts.length) {
           this.isAddAccountActive = false;
           this.isAddTransactionStatus = false;

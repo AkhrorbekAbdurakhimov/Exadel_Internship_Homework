@@ -26,6 +26,13 @@ export class CategoriesService {
       })
   }
 
+  updateCategory(id: number, title: string) {
+    return this.http
+      .put<any>(`${environment.apiUrl}/api/categories/${id}`, {
+        title
+      })
+  }
+
   deleteCategory(categoryId: number) {
     return this.http
       .delete<any>(`${environment.apiUrl}/api/categories/${categoryId}`)

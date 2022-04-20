@@ -1,0 +1,130 @@
+.edit-category-modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.433);
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  .edit-category-modal {
+    z-index: 11;
+    width: 500px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+
+
+    .header {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      h1 {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 41px;
+        color: #373737;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 8px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+    }
+
+    form {
+      margin-top: 30px;
+
+      label {
+        display: flex;
+        flex-direction: column;
+
+        span {
+          font-family: 'Space Grotesk';
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 24px;
+          margin-bottom: 10px;
+        }
+
+        input {
+          width: 60%;
+          outline: none;
+          font-size: 20px;
+          padding: 5px 8px;
+          background: #F9F9F9;
+          font-family: 'Alata';
+          border-radius: 10px;
+        }
+
+        .errorInput {
+          border: 2px solid red;
+        }
+
+        mat-error {
+          font-family: 'Alata';
+        }
+      }
+
+      .update-category-error {
+        display: none;
+        font-family: 'Alata';
+        margin-top: 10px;
+        color: red;
+      }
+
+      .active {
+        display: block;
+      }
+
+      .buttons-wrapper {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          background: none;
+          border: none;
+          padding: 8px 15px;
+          font-family: 'Alata';
+          color: #fff;
+          font-size: 18px;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+
+        .submit-btn {
+          margin-left: 20px;
+          background-color: green;
+        }
+
+        .cancel-btn {
+          background-color: red;
+          margin-left: auto;
+        }
+
+        .disabled {
+          cursor: not-allowed;
+          background-color: rgb(0, 128, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.edit-category-modal-container-active {
+  display: flex;
+}

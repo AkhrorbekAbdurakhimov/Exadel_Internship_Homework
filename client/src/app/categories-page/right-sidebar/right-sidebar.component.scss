@@ -1,0 +1,83 @@
+.categories-filter-wrapper {
+
+  .income-category, .expense-category, .add-category {
+    color: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    width: 250px;
+    margin-left: auto;
+    padding: 12px;
+    border: 2px solid transparent;
+
+    &:hover {
+      border: 2px solid #000;
+      transition: all 1s ease;
+      cursor: pointer;
+    }
+
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-family: 'Space Grotesk';
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 26px;
+    }
+  }
+
+  .income-category, .expense-category {
+    background: #F9F9F9;
+    margin-bottom: 15px;
+
+    .icon-wrapper {
+
+      mat-icon {
+        color: #fff;
+      }
+    }
+
+    .title {
+      color: #373737;
+    }
+  }
+
+  .income-category {
+    .icon-wrapper {
+      background-color: green;
+    }
+  }
+
+  .active {
+    border: 2px solid #000;
+  }
+
+  .expense-category {
+    .icon-wrapper {
+      background-color: red;
+    }
+  }
+
+  .add-category {
+    background: #B9E2E6;
+
+    .icon-wrapper {
+      background-color: #fff;
+
+      mat-icon {
+        color: #86C9CF;
+      }
+    }
+
+    .title {
+      color: #373737;
+    }
+  }
+}

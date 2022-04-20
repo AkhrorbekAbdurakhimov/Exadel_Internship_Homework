@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { Category } from '../global-components/models/category.model';
 
+import { DataService } from './services/data.service';
 import { CategoriesService } from './services/categories.service';
 
 @UntilDestroy()
@@ -16,28 +16,22 @@ import { CategoriesService } from './services/categories.service';
 
 export class CategoriesPageComponent implements OnInit {
 
-  verifyTitle: string = '';
-  verifyMessage: string = '';
-  deletedCategoryId!: number;
   categories: Category[] = [];
-  toasterMessage: string = '';
-  verifyModalStatus: boolean = false;
-  isAddCategoryError: boolean = false;
-  addCategoryErrorMessage: string = '';
-  toasterMessageStatus: boolean = false;
-  isOpenAddCategoryModal: boolean = false;
-  selectedCategoryType: string = 'expense';
+  currentCategory!: Category;
   isActiveIncomeCategories: boolean = false;
   isActiveExpenseCategories: boolean = false;
-  isWarning: boolean = false;
 
-  addCategoryForm = this.fb.group({
-    categoryType: ['expense'],
-    title: ['', [Validators.required]]
-  })
+  isOpenAddCategoryModal: boolean = false;
+  isOpenUpdateCategoryModal: boolean = false;
+
+  verifyTitle: string = '';
+  verifyMessage: string = '';
+  verifyModalStatus: boolean = false;
+  deletedCategoryId!: number;
+
 
   constructor(
-    private fb: FormBuilder,
+    private dataService: DataService,
     private categoryService: CategoriesService
   ) { }
 
@@ -57,31 +51,7 @@ export class CategoriesPageComponent implements OnInit {
       })
   }
 
-  addCategory() {
-    if (this.addCategoryForm.valid) {
-      const { categoryType, title } = this.addCategoryForm.value;
-      this.categoryService
-        .addCategory(categoryType, title)
-        .pipe(untilDestroyed(this))
-        .subscribe({
-          next: data => {
-            this.toasterMessageStatus = true;
-            this.toasterMessage = data.message;
-            this.isOpenAddCategoryModal = false;
-            setTimeout(() => {
-              this.toasterMessageStatus = false;
-              window.location.reload()
-            }, 2500)
-          },
-          error: error => {
-            this.isAddCategoryError = true;
-            this.addCategoryErrorMessage = error.error.message;
-          }
-        })
-    }
-  }
-
-  filterCategory(type: string) {
+  filterCategory(type: any) {
     this.getCategories(type);
     if (type === 'income') {
       this.isActiveIncomeCategories = !this.isActiveIncomeCategories;
@@ -95,27 +65,25 @@ export class CategoriesPageComponent implements OnInit {
     }
   }
 
-  closeAddCategoryModal() {
-    this.isOpenAddCategoryModal = false;
-  }
-
-  closeVerifyModal() {
-    this.verifyModalStatus = false;
+  searchCategory(searchedText: any) {
+    this.getCategories(null, searchedText)
   }
 
   openAddCategoryModal() {
     this.isOpenAddCategoryModal = true;
   }
 
-  openVerifyModal(categoryId: number, title: string, message: string) {
+  closeAddCategoryModal() {
+    this.isOpenAddCategoryModal = false;
+  }
+
+  openVerifyModal(categoryId: any) {
     this.verifyModalStatus = true;
-    this.verifyTitle = title;
-    this.verifyMessage = message;
     this.deletedCategoryId = categoryId;
   }
 
-  searchCategory(searchedText: string) {
-    this.getCategories(null, searchedText)
+  closeVerifyModal() {
+    this.verifyModalStatus = false;
   }
 
   deleteCategory() {
@@ -124,22 +92,67 @@ export class CategoriesPageComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe({
         next: data => {
-          this.isWarning = false;
-          this.toasterMessage = data.message;
-          this.toasterMessageStatus = true;
+          this.dataService.changeIsWarning(false);
+          this.dataService.changeToasterMessageStatus(true);
+          this.dataService.changeToasterMessage(data.message);
+          this.closeVerifyModal()
+          this.getCategories();
           setTimeout(() => {
-            this.toasterMessageStatus = false;
-            window.location.reload();
+            this.dataService.changeToasterMessageStatus(false);
           }, 2500)
         },
         error: error => {
-          this.isWarning = true;
-          this.toasterMessage = error.error.message;
-          this.toasterMessageStatus = true;
+          this.dataService.changeIsWarning(true);
+          this.dataService.changeToasterMessageStatus(true);
+          this.dataService.changeToasterMessage(error.error.message);
           setTimeout(() => {
-            this.toasterMessageStatus = false;
+            this.dataService.changeToasterMessageStatus(false);
           }, 2500)
         }
       })
   }
+
+  openUpdateCategoryModal(category: any) {
+    this.isOpenUpdateCategoryModal = true;
+    this.currentCategory = category
+  }
+
+  closeUpdateCategoryModal() {
+    this.isOpenUpdateCategoryModal = false;
+  }
 }
+
+// export class CategoriesPageComponent implements OnInit {
+
+//   isOpenUpdateCategoryModal: boolean = false;
+
+
+//   deleteCategory() {
+//     this.categoryService
+//       .deleteCategory(this.deletedCategoryId)
+//       .pipe(untilDestroyed(this))
+//       .subscribe({
+//         next: data => {
+//           this.isWarning = false;
+//           this.toasterMessage = data.message;
+//           this.toasterMessageStatus = true;
+//           setTimeout(() => {
+//             this.toasterMessageStatus = false;
+//             window.location.reload();
+//           }, 2500)
+//         },
+//         error: error => {
+//           this.isWarning = true;
+//           this.toasterMessage = error.error.message;
+//           this.toasterMessageStatus = true;
+//           setTimeout(() => {
+//             this.toasterMessageStatus = false;
+//           }, 2500)
+//         }
+//       })
+//   }
+
+//   openUpdateCategoryModal(category: Category) {
+//     this.isOpenUpdateCategoryModal = true;
+//   }
+// }

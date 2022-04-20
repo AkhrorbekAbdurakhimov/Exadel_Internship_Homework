@@ -1,0 +1,37 @@
+<div class="edit-category-modal-container" [class.edit-category-modal-container-active]="isOpenUpdateCategoryModal">
+  <div class="edit-category-modal">
+    <div class="header">
+      <h1>Update Category</h1>
+      <button class="close-btn" (click)="closeUpdateCategoryModal.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <form
+      name="addCategoryForm"
+      (ngSubmit)="updateCategory()"
+      [formGroup]="updateCategoryForm"
+    >
+      <label>
+        <span>Title* </span>
+        <input
+          type="text"
+          name="title"
+          formControlName="title"
+          value="{{currentCategory && currentCategory.title ? currentCategory.title : ''}}"
+          [ngClass]="{
+            errorInput
+            : updateCategoryForm.get('title')?.hasError('required')
+            || updateCategoryForm.get('title')?.hasError('maxlength')
+          }"
+        >
+        <mat-error *ngIf="updateCategoryForm.get('title')?.hasError('required')">Title is required</mat-error>
+        <mat-error *ngIf="updateCategoryForm.get('title')?.hasError('maxlength')">Maximum number of characters reached</mat-error>
+      </label>
+      <p class="update-category-error" [class.active]="isUpdateCategoryError">{{updateCategoryErrorMessage}}</p>
+      <div class="buttons-wrapper">
+        <button class="cancel-btn" (click)="closeUpdateCategoryModal.emit()">Cancel</button>
+        <button class="submit-btn" [class.disabled]="!updateCategoryForm.valid">Change</button>
+      </div>
+    </form>
+  </div>
+</div>
