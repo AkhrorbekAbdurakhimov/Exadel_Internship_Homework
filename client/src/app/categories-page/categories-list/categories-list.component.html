@@ -1,0 +1,55 @@
+<div class="categories-wrapper">
+  <div class="search-wrapper">
+    <input
+      type="search"
+      placeholder="Search"
+      #searchInput
+      (keyup)="searchCategory.emit(searchInput.value)"
+    >
+    <mat-icon class="search-icon">search</mat-icon>
+  </div>
+  <ul class="categories-list">
+    <li
+      class="categories-item"
+      *ngFor="let category of categories"
+      [class.border-red]="category.type === 'expense'"
+    >
+      <span>{{category.title}}</span>
+      <mat-icon
+        (click)="openUpdateCategoryModal.emit(category)"
+      >edit</mat-icon>
+      <mat-icon
+        (click)="openVerifyModal.emit(category.id)"
+      >delete</mat-icon>
+    </li>
+  </ul>
+</div>
+
+
+<!-- <div class="wrapper">
+  <div class="categories-wrapper">
+    <div class="search-wrapper">
+      <input type="search" placeholder="Search" #searchInput (keyup)="searchCategory(searchInput.value)">
+      <mat-icon class="search-icon">search</mat-icon>
+    </div>
+    <ul class="categories-list">
+      <li
+        class="categories-item"
+        *ngFor="let category of categories"
+        [class.border-red]="category.type === 'expense'"
+      >
+        <span>{{category.title}}</span>
+        <mat-icon
+          (click)="openUpdateCategoryModal(category)"
+        >edit</mat-icon>
+        <mat-icon
+          (click)="openVerifyModal(
+            category.id,
+            'Delete Transaction',
+            'Are you sure you want to delete transaction?'
+          )"
+        >delete</mat-icon>
+      </li>
+    </ul>
+  </div>
+</div> -->

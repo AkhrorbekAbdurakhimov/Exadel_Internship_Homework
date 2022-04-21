@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { ReactiveFormsModule } from '@angular/forms'
 
@@ -26,7 +26,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     HeaderComponent,
     SpinnerComponent,
     AccountsComponent,
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class GlobalComponentsModule { }

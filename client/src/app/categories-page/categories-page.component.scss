@@ -1,0 +1,22 @@
+.container {
+  padding: 30px;
+  height: 100vh;
+  background: #EFEFEF;
+
+  .wrapper {
+    display: flex;
+    height: calc(100% - 50px);
+    position: relative;
+
+
+    app-categories-list {
+      padding-top: 30px;
+      width: 78%;
+    }
+
+    app-right-sidebar {
+      padding-top: 30px;
+      width: 22%;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="container">
+  <app-header></app-header>
+  <div class="wrapper">
+    <app-categories-list
+      [categories]="categories"
+      (searchCategory)="searchCategory($event)"
+      (openVerifyModal)="openVerifyModal($event)"
+      (openUpdateCategoryModal)="openUpdateCategoryModal($event)"
+    ></app-categories-list>
+    <app-right-sidebar
+      (filterCategory)="filterCategory($event)"
+      (openAddCategoryModal)="openAddCategoryModal()"
+      [isActiveIncomeCategories]="isActiveIncomeCategories"
+      [isActiveExpenseCategories]="isActiveExpenseCategories"
+    ></app-right-sidebar>
+  </div>
+</div>
+<app-add-category
+  [isOpenAddCategoryModal]="isOpenAddCategoryModal"
+  (closeAddCategoryModal)="closeAddCategoryModal()"
+  (getCategories)="getCategories()"
+></app-add-category>
+<app-toaster-message></app-toaster-message>
+<app-verify-modal
+  [verifyModalStatus]="verifyModalStatus"
+  (closeVerifyModal)="closeVerifyModal()"
+  (deleteCategory)="deleteCategory()"
+></app-verify-modal>
+<app-update-modal
+  [currentCategory]="currentCategory"
+  [isOpenUpdateCategoryModal]="isOpenUpdateCategoryModal"
+  (getCategories)="getCategories()"
+  (closeUpdateCategoryModal)="closeUpdateCategoryModal()"
+></app-update-modal>
