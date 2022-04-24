@@ -1,0 +1,19 @@
+<div class="header-wrapper">
+  <div class="header-wrapper_logo">
+    <a routerLink="/">Budgetify</a>
+  </div>
+  <div class="header-wrapper_list">
+    <ul>
+      <li><a [routerLink]="['/categories']" [routerLinkActive]="'active'">Categories</a></li>
+      <li><a [routerLink]="['/subscriptions']" [routerLinkActive]="'active'">Subscriptions</a></li>
+      <li><a [routerLink]="['/statistics']" [routerLinkActive]="'active'">Statistics</a></li>
+      <li><a [routerLink]="['/admin']" [routerLinkActive]="'active'">Admin</a></li>
+    </ul>
+  </div>
+  <div class="header-wrapper_profile">
+    <span class="profile-name">{{fullName}}</span>
+    <button class="profile-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</div>

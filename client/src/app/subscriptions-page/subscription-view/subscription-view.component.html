@@ -1,0 +1,38 @@
+<div class="container" [class.active]="isOpenSubscriptionView">
+  <div class="view-subscription" [class.active]="isOpenSubscriptionView">
+    <div class="view-subscription_header">
+      <span>Subscription Information</span>
+      <button class="edit-btn">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="delete-btn">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="close-btn" (click)="closeSubscripitonViewModal.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="view-subscription_body">
+      <div class="top">
+        <span class="title">{{subscription && subscription.title ? subscription.title : ''}}</span>
+        <span class="amount">{{subscription && subscription.amount ? subscription.amount : ''}} {{subscription && subscription.currency ? subscription.currency : ''}}</span>
+      </div>
+      <div class="categories-wrapper">
+        <div class="category" *ngFor="let category of currentSubscriptionCategories">{{category ? category : ''}}</div>
+      </div>
+      <div class="details-wrapper">
+        <div class="details-wrapper_item">
+          <span>Payment Dates:</span>
+          <span>{{subscription && subscription.initialDate ? subscription.initialDate : ''}} - {{subscription && subscription.lastDate ? subscription.lastDate : ''}}</span>
+        </div>
+        <div class="details-wrapper_item">
+          <span>Description:</span>
+          <span>{{subscription && subscription.description ? subscription.description : ''}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="view-subscription_footer">
+      <button (click)="closeSubscripitonViewModal.emit()">close</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="search-form">
+    <div class="search-wrapper">
+      <input
+        type="search"
+        placeholder="Search"
+        #searchInput
+        (keyup)="filterSubscriptions.emit(searchInput.value)"
+      >
+      <mat-icon class="search-icon">search</mat-icon>
+    </div>
+    <div class="filter-wrapper">
+      <mat-icon class="filter-icon">filter_list</mat-icon>
+      <span>Creation date</span>
+    </div>
+  </div>
+  <ul class="subscriptions-list">
+    <p class="no-subscriptions" [class.no-subscriptions-active]="subscriptions.length === 0">No subscriptions added yet</p>
+    <li class="subscriptions-list_item" *ngFor="let subscription of subscriptions" (click)="openSubscriptioViewModal.emit(subscription.id)">
+      <span class="category-name" *ngFor="let category of subscription.categories">{{category}}</span>
+      <div class="details">
+        <h4 class="title">{{subscription.title ? subscription.title : ''}}</h4>
+        <div class="details-wrapper">
+          <span>Next payment date:</span>
+          <span>{{subscription.initialDate ? subscription.initialDate : ''}}</span>
+        </div>
+      </div>
+      <p class="amount">{{subscription.amount ? subscription.amount : ''}} {{subscription.currency ? subscription.currency : ''}}</p>
+    </li>
+  </ul>
+</div>

@@ -4,9 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
-import { Category } from 'src/app/global-components/models/category.model';
+import { Category } from 'src/app/models/category.model';
 
-import { DataService } from '../services/data.service';
+import { DataService } from 'src/app/services/data.service';
 import { CategoriesService } from '../services/categories.service';
 
 @UntilDestroy()

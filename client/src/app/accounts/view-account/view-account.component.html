@@ -1,0 +1,37 @@
+<div class="container" [class.active]="isOpenViewAccountModal">
+  <div class="view-account" [class.active]="isOpenViewAccountModal">
+    <div class="view-account_header">
+      <span>Account Information</span>
+      <button class="edit-btn">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="delete-btn">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="close-btn" (click)="closeViewAccountModal.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="view-account_body">
+      <p>
+        <span>Title: </span>
+        <span>{{account ? account.title : ''}}</span>
+      </p>
+      <p>
+        <span>Balance: </span>
+        <span>{{account ? account.balance : ''}}</span>
+      </p>
+      <p>
+        <span>currency: </span>
+        <span>{{account ? account.currency : ''}}</span>
+      </p>
+      <p>
+        <span>Description: </span>
+        <span>{{account ? account.description : ''}}</span>
+      </p>
+    </div>
+    <div class="view-account_footer">
+      <button (click)="closeViewAccountModal.emit()">close</button>
+    </div>
+  </div>
+</div>

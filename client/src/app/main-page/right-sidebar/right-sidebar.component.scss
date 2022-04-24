@@ -1,0 +1,113 @@
+.wrapper {
+  height: 100%;
+  padding-top: 20px;
+  position: relative;
+
+  .top-wrapper {
+    .income-category, .expense-category, .add-account, .add-transaction {
+      color: pointer;
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      width: 270px;
+      margin-left: auto;
+      padding: 13px 15px;
+      border: 2px solid transparent;
+
+      &:hover {
+        border: 2px solid #000;
+        transition: all 1s ease;
+        cursor: pointer;
+      }
+
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 3px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .title {
+        font-family: 'Space Grotesk';
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 26px;
+      }
+    }
+
+    .income-category, .expense-category {
+      background: #F9F9F9;
+      margin-bottom: 15px;
+
+      .icon-wrapper {
+
+        mat-icon {
+          color: #fff;
+        }
+      }
+
+      .title {
+        color: #373737;
+        font-family: 'Space Grotesk';
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+      }
+    }
+
+    .income-category {
+      .icon-wrapper {
+        background-color: green;
+      }
+    }
+
+    .expense-category {
+      .icon-wrapper {
+        background-color: red;
+      }
+    }
+
+    .add-account, .add-transaction {
+      background: #B9E2E6;
+
+      .icon-wrapper {
+        background-color: #fff;
+
+        mat-icon {
+          color: #86C9CF;
+        }
+      }
+
+      .title {
+        color: #373737;
+      }
+    }
+
+    .add-transaction-disable {
+      cursor: not-allowed;
+
+      &:hover {
+        pointer-events: none;
+        cursor: none;
+      }
+    }
+
+    .add-account {
+      display: none;
+    }
+
+    .add-account-active {
+      display: flex;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .add-transaction {
+      margin-bottom: 15px;
+    }
+  }
+}

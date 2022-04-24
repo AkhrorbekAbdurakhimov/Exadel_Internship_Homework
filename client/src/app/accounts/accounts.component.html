@@ -1,0 +1,16 @@
+<app-accounts-list
+  [accounts]="accounts"
+  (openAddAccountModal)="openAddAccountModal()"
+  (openViewAccountModal)="openViewAccountModal($event)"
+></app-accounts-list>
+<app-view-account
+  [account]="account"
+  [isOpenViewAccountModal]="isOpenViewAccountModal"
+  (closeViewAccountModal)="closeViewAccountModal()"
+></app-view-account>
+<app-add-account
+  [currencies]="currencies"
+  [isOpenAddAccountModal]="isOpenAddAccountModal"
+  (getAccounts)="getAccounts()"
+  (closeAddAccountModal)="closeAddAccountModal()"
+></app-add-account>

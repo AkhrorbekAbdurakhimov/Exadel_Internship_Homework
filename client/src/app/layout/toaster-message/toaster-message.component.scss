@@ -1,0 +1,25 @@
+.toaster-message {
+  background-color: #fff;
+  width: 500px;
+  border-radius: 5px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  padding: 15px;
+  font-size: 20px;
+  background-color: green;
+  color: white;
+  font-family: 'Alata';
+  transform: translateX(calc(100% + 20px));
+  transition: transform 1s ease;
+  z-index: 1000;
+}
+
+.toaster-message-active {
+  transform: translate(0);
+  transition: transform 1s ease;
+}
+
+.toaster-message-warning {
+  background-color: #F7B217;
+}

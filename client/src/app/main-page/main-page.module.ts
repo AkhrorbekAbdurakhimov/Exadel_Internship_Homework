@@ -5,12 +5,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { SharedModule } from '../shared/shared.module';
-import { GlobalComponentsModule } from '../global-components/global-components.module';
-
-import { MainPageComponent } from './main-page.component';
+import { LayoutModule } from '../layout/layout.module';
+import { AccountsModule } from '../accounts/accounts.module';
 
 import { AuthGuard } from '../auth/auth.guard';
-import { MainAsideComponent } from './main-aside/main-aside.component';
+
+import { MainPageComponent } from './main-page.component';
+import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
+import { TransactionsListComponent } from './transactions-list/transactions-list.component';
+import { ViewTransactionComponent } from './view-transaction/view-transaction.component';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, canActivate: [AuthGuard] }
@@ -19,14 +23,18 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     MainPageComponent,
-    MainAsideComponent
+    TransactionsListComponent,
+    RightSidebarComponent,
+    ViewTransactionComponent,
+    AddTransactionComponent
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),
     CommonModule,
     SharedModule,
+    LayoutModule,
+    AccountsModule,
     ReactiveFormsModule,
-    GlobalComponentsModule,
     RouterModule.forChild(routes),
   ],
   exports: [

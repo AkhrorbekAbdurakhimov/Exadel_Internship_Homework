@@ -5,8 +5,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
+
+// ==== Pages ====
 import { MainPageModule } from './main-page/main-page.module';
 import { CategoriesPageModule } from './categories-page/categories-page.module';
+import { SubscriptionsPageModule } from './subscriptions-page/subscriptions-page.module';
 
 import { AuthInterceptor } from './auth/auth.interceptor';
 
@@ -25,7 +28,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MainPageModule,
     HttpClientModule,
     AppRoutingModule,
-    CategoriesPageModule
+    CategoriesPageModule,
+    SubscriptionsPageModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

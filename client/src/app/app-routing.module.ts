@@ -5,13 +5,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
+import { SubscriptionsPageComponent } from './subscriptions-page/subscriptions-page.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
   { path: 'categories', component: CategoriesPageComponent },
+  { path: 'subscriptions', component: SubscriptionsPageComponent },
   { path: '', component: MainPageComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
