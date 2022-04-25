@@ -15,6 +15,7 @@ import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { ViewTransactionComponent } from './view-transaction/view-transaction.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
+import { VerifyModalComponent } from './verify-modal/verify-modal.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent, canActivate: [AuthGuard] }
@@ -26,7 +27,8 @@ const routes: Routes = [
     TransactionsListComponent,
     RightSidebarComponent,
     ViewTransactionComponent,
-    AddTransactionComponent
+    AddTransactionComponent,
+    VerifyModalComponent
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

@@ -6,6 +6,7 @@
 <app-view-account
   [account]="account"
   [isOpenViewAccountModal]="isOpenViewAccountModal"
+  (openVerifyModal)="openVerifyModal($event)"
   (closeViewAccountModal)="closeViewAccountModal()"
 ></app-view-account>
 <app-add-account
@@ -14,3 +15,11 @@
   (getAccounts)="getAccounts()"
   (closeAddAccountModal)="closeAddAccountModal()"
 ></app-add-account>
+
+<app-toaster-message></app-toaster-message>
+
+<app-verify-modal
+  [verifyModalStatus]="verifyModalStatus"
+  (deleteAccount)="deleteAccount()"
+  (closeVerifyModal)="closeVerifyModal()"
+></app-verify-modal>

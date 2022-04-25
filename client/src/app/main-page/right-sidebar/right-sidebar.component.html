@@ -1,13 +1,21 @@
 <div class="wrapper">
   <div class="wrapper">
     <div class="top-wrapper">
-      <div class="income-category">
+      <div
+        class="income-transaction"
+        [class.active]="isActiveIncomeTransactions"
+        (click)="filterTansaction.emit('income')"
+      >
         <div class="icon-wrapper">
           <mat-icon class="expense-icon">arrow_downward</mat-icon>
         </div>
         <span class="title">Income</span>
       </div>
-      <div class="expense-category">
+      <div
+        class="expense-transaction"
+        [class.active]="isActiveExpenseTransactions"
+        (click)="filterTansaction.emit('expense')"
+      >
         <div class="icon-wrapper">
           <mat-icon class="expense-icon">arrow_upward</mat-icon>
         </div>

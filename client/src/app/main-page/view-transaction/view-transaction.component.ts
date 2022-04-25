@@ -14,6 +14,7 @@ export class ViewTransactionComponent implements OnInit {
   @Input() transaction!: Transaction;
   @Input() isOpenViewTransactionModal: boolean = false;
 
+  @Output() openVerifyModal: EventEmitter<any> = new EventEmitter();
   @Output() closeViewTransactionModal: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

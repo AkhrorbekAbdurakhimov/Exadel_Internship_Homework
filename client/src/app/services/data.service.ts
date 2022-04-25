@@ -19,6 +19,7 @@ export class DataService {
 
   private accountIdSource = new BehaviorSubject<number>(0)
   private accountsSource = new BehaviorSubject<Account[]>([])
+  private getAccountsSource = new BehaviorSubject<boolean>(false);
   private addAccountModalStatusSource = new BehaviorSubject<boolean>(false);
 
   // toaster-message
@@ -30,12 +31,17 @@ export class DataService {
   // accounts
 
   accounts = this.accountsSource.asObservable();
+  getAccountsStatus = this.getAccountsSource.asObservable();
   currentAccountId = this.accountIdSource.asObservable();
   currentAccountModalStatus = this.addAccountModalStatusSource.asObservable();
 
   constructor() { }
 
   // accounts
+
+  changeGetAccountsStatus(status: boolean) {
+    this.getAccountsSource.next(status)
+  }
 
   sendAccounts(accounts: Account[]) {
     this.accountsSource.next(accounts);

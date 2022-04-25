@@ -58,7 +58,6 @@ export class AddSubscriptionComponent implements OnInit {
   submitSubcriptionForm() {
     if (this.addSubcriptionForm.valid) {
       const { title, categories, amount, initialDate, lastDate, description } = this.addSubcriptionForm.value;
-      console.log(title, categories, amount, initialDate, lastDate, description);
 
       this.subscriptionsService
         .addSubscription(this.currentAccountId, title, categories, amount, initialDate, lastDate, description)

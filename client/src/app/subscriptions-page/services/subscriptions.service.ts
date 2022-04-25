@@ -24,7 +24,6 @@ export class SubscriptionsService {
   }
 
   addSubscription(accountId: number, title: string, categories: string[], amount: number, initialDate: string, lastDate: any = null, description: any = null) {
-    console.log(accountId, title, categories, amount, initialDate, lastDate, description);
 
     return this.http
       .post<any>(`${environment.apiUrl}/api/subscriptions`, {

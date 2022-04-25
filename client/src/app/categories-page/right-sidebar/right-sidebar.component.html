@@ -19,39 +19,13 @@
     </div>
     <span class="title">Expenses</span>
   </div>
-  <div class="add-category" (click)="openAddCategoryModal.emit()">
+  <div
+    class="add-category"
+    (click)="openAddCategoryModal.emit()"
+  >
     <div class="icon-wrapper">
       <mat-icon class="add-icon">add</mat-icon>
     </div>
     <span class="title">Add Category</span>
   </div>
 </div>
-<!--
-<div class="categories-filter-wrapper">
-  <div
-    class="income-category active"
-    (click)="filterCategory.emit('income')"
-    [class.active]="isActiveIncomeCategories"
-  >
-    <div class="icon-wrapper">
-      <mat-icon class="expense-icon">arrow_downward</mat-icon>
-    </div>
-    <span class="title">Income</span>
-  </div>
-  <div
-    class="expense-category"
-    (click)="filterCategory.emit('expense')"
-    [class.active]="isActiveExpenseCategories"
-  >
-    <div class="icon-wrapper">
-      <mat-icon class="expense-icon">arrow_upward</mat-icon>
-    </div>
-    <span class="title">Expenses</span>
-  </div>
-  <div class="add-category" (click)="openAddCategoryModal()">
-    <div class="icon-wrapper">
-      <mat-icon class="add-icon">add</mat-icon>
-    </div>
-    <span class="title">Add Category</span>
-  </div>
-</div> -->

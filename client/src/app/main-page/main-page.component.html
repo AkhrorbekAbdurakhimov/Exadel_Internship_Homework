@@ -4,11 +4,17 @@
     <app-accounts></app-accounts>
     <app-transactions-list
       [transactions]="transactions"
+      [orderedStatus]="orderedStatus"
+      (searchTansaction)="searchTansaction($event)"
+      (orderTransactions)="orderTransactions($event)"
       (openViewTransactionModal)="openViewTransactionModal($event)"
     ></app-transactions-list>
     <app-right-sidebar
       [isAddAccountStatus]="isAddAccountStatus"
       [isAddTransactionStatus]="isAddTransactionStatus"
+      [isActiveIncomeTransactions]="isActiveIncomeTransactions"
+      [isActiveExpenseTransactions]="isActiveExpenseTransactions"
+      (filterTansaction)="filterTansaction($event)"
       (openAddAccountModal)="openAddAccountModal()"
       (openAddTransactionModal)="openAddTransactionModal()"
     ></app-right-sidebar>
@@ -19,6 +25,7 @@
   [transaction]="transaction"
   [categories]="currentTransactionCategories"
   [isOpenViewTransactionModal]="isOpenViewTransactionModal"
+  (openVerifyModal)="openVerifyModal($event)"
   (closeViewTransactionModal)="closeViewTransactionModal()"
 ></app-view-transaction>
 
@@ -30,3 +37,11 @@
   (changeTransactionType)="changeTransactionType($event)"
   (closeAddTransactionModal)="closeAddTransactionModal()"
 ></app-add-transaction>
+
+<app-verify-modal
+  [verifyModalStatus]="verifyModalStatus"
+  (closeVerifyModal)="closeVerifyModal()"
+  (deleteTransaction)="deleteTransaction()"
+></app-verify-modal>
+
+<app-toaster-message></app-toaster-message>

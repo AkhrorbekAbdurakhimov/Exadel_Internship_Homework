@@ -9,7 +9,10 @@ import { Transaction } from 'src/app/models/transaction.model';
 export class TransactionsListComponent implements OnInit {
 
   @Input() transactions: Transaction[] = [];
+  @Input() orderedStatus: boolean = false;
 
+  @Output() searchTansaction: EventEmitter<any> = new EventEmitter();
+  @Output() orderTransactions: EventEmitter<any> = new EventEmitter();
   @Output() openViewTransactionModal: EventEmitter<any> = new EventEmitter();
 
   constructor() { }

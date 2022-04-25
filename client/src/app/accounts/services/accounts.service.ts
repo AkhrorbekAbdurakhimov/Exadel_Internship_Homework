@@ -29,4 +29,9 @@ export class AccountsService {
         description
       })
   }
+
+  deleteAccount(id: number) {
+    return this.http
+      .delete<any>(`${environment.apiUrl}/api/accounts/${id}`)
+  }
 }

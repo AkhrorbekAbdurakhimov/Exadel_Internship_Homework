@@ -5,7 +5,7 @@
       <button class="edit-btn">
         <mat-icon>edit</mat-icon>
       </button>
-      <button class="delete-btn">
+      <button class="delete-btn" (click)="openVerifyModal.emit(account.id)">
         <mat-icon>delete</mat-icon>
       </button>
       <button class="close-btn" (click)="closeViewAccountModal.emit()">

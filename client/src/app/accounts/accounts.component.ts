@@ -21,6 +21,9 @@ export class AccountsComponent implements OnInit {
   account!: Account
   accounts: Account[] = [];
   currencies: Currency[] = [];
+  deletedAccountId!: number;
+
+  verifyModalStatus: boolean = false;
 
   isOpenAddAccountModal: boolean = false;
 
@@ -39,6 +42,13 @@ export class AccountsComponent implements OnInit {
       .currentAccountModalStatus
       .pipe(untilDestroyed(this))
       .subscribe((status) => this.isOpenAddAccountModal = status)
+
+    this.dataservice
+      .getAccountsStatus
+      .pipe(untilDestroyed(this))
+      .subscribe((status) => {
+        if (status) this.getAccounts()
+      })
   }
 
   getAccounts() {
@@ -50,9 +60,7 @@ export class AccountsComponent implements OnInit {
           this.accounts = data.accounts;
           this.dataservice.sendAccounts(data.accounts);
           this.accounts.forEach(account => {
-            console.log(account);
             if (account.isSelected) {
-              console.log('send', account.isSelected, account.id);
               this.dataservice.sendAccountId(account.id)
             };
           })
@@ -68,6 +76,24 @@ export class AccountsComponent implements OnInit {
         next: data => {
           this.account = data.account;
           this.dataservice.sendAccountId(data.account.id);
+        }
+      })
+  }
+
+  deleteAccount() {
+    this.accountsService
+      .deleteAccount(this.deletedAccountId)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: data => {
+          this.dataservice.changeToasterMessageStatus(true);
+          this.dataservice.changeToasterMessage(data.message);
+          this.closeVerifyModal();
+          this.closeViewAccountModal();
+          this.getAccounts();
+          setTimeout(() => {
+            this.dataservice.changeToasterMessageStatus(false);
+          }, 2500)
         }
       })
   }
@@ -102,6 +128,15 @@ export class AccountsComponent implements OnInit {
 
   closeAddAccountModal() {
     this.isOpenAddAccountModal = false;
+  }
+
+  openVerifyModal(accountId: any) {
+    this.verifyModalStatus = true;
+    this.deletedAccountId = accountId
+  }
+
+  closeVerifyModal() {
+    this.verifyModalStatus = false;
   }
 
 }

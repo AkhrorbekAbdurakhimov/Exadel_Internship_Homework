@@ -1,11 +1,11 @@
 <div class="wrapper">
   <div class="search-form">
     <div class="search-wrapper">
-      <input type="search" placeholder="Search">
+      <input type="search" placeholder="Search" #searchInput (keyup)="searchTansaction.emit(searchInput.value)">
       <mat-icon class="search-icon">search</mat-icon>
     </div>
-    <div class="filter-wrapper">
-      <mat-icon class="filter-icon">filter_list</mat-icon>
+    <div class="filter-wrapper" (click)="orderTransactions.emit(orderedStatus ? 'desc' : 'asc')">
+      <mat-icon class="filter-icon">{{orderedStatus ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
       <span>Transactions date</span>
     </div>
   </div>

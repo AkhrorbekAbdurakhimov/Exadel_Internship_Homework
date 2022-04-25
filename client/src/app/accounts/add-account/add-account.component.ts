@@ -32,7 +32,7 @@ export class AddAccountComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dataservice: DataService,
+    private dataService: DataService,
     private accountsService: AccountsService
   ) { }
 
@@ -47,12 +47,12 @@ export class AddAccountComponent implements OnInit {
         .pipe(untilDestroyed(this))
         .subscribe({
           next: data => {
-            this.dataservice.changeToasterMessageStatus(true);
-            this.dataservice.changeToasterMessage(data.message);
-            this.isOpenAddAccountModal = false;
+            this.dataService.changeToasterMessageStatus(true);
+            this.dataService.changeToasterMessage(data.message);
+            this.dataService.sendAccountModalStatus(false);
             this.getAccounts.emit();
             setTimeout(() => {
-              this.dataservice.changeToasterMessageStatus(false);
+              this.dataService.changeToasterMessageStatus(false);
             }, 2500)
           },
           error: error => {

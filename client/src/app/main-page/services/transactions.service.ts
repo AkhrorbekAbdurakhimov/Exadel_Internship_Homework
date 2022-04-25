@@ -11,9 +11,12 @@ export class TransactionsService {
 
   constructor(private http: HttpClient) { }
 
-  getTransactions(accountId: number) {
+  getTransactions(accountId: number, type: any = null, order: any = null) {
     return this.http
-      .get<any>(`${environment.apiUrl}/api/transactions/${accountId}`)
+      .get<any>(`
+        ${environment.apiUrl}/api/transactions/${accountId}${type && order ? `?type=${type}&order=${order}` :
+          order ? `?order=${order}` : type ? `?type=${type}` : ''
+        }`)
   }
 
   getTransaction(transactionId: number) {
@@ -32,5 +35,11 @@ export class TransactionsService {
         date,
         description
       })
+  }
+
+  deleteTransaction(transactionId: number) {
+    console.log(transactionId);
+    return this.http
+      .delete<any>(`${environment.apiUrl}/api/transactions/${transactionId}`)
   }
 }

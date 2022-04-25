@@ -17,17 +17,27 @@ import { TransactionsService } from './services/transactions.service';
 
 export class MainPageComponent implements OnInit {
 
+  orderType!: string;
+  filterType!: string;
+  deletedTransactionId!: number;
+
   accountId!: number;
   transaction!: Transaction;
   categories: Category[] = [];
   transactions: Transaction[] = [];
   currentTransactionCategories: Category[] = [];
 
+  verifyModalStatus: boolean = false;
+
+  orderedStatus: boolean = false;
   isAddAccountStatus: boolean = false;
   isAddTransactionStatus: boolean = false;
 
   isOpenAddTransactionModal: boolean = false;
   isOpenViewTransactionModal: boolean = false;
+
+  isActiveIncomeTransactions: boolean = false;
+  isActiveExpenseTransactions: boolean = false;
 
   constructor(
     private dataService: DataService,
@@ -71,19 +81,46 @@ export class MainPageComponent implements OnInit {
       })
   }
 
-  getTransactions(accountId: number) {
+  getTransactions(accountId: number, type: any = null, order: any = null, searchedText = '') {
     this.transactionsService
-      .getTransactions(accountId)
+      .getTransactions(accountId, type, order)
       .pipe(untilDestroyed(this))
       .subscribe({
         next: data => {
           this.transactions = data.transactions
+          this.transactions = this.transactions.filter(transaction => transaction.title.toLowerCase().includes(searchedText.toLowerCase()))
+        }
+      })
+  }
+
+  deleteTransaction() {
+    this.transactionsService
+      .deleteTransaction(this.deletedTransactionId)
+      .pipe(untilDestroyed(this))
+      .subscribe({
+        next: data => {
+          if (data.type === 'warning') {
+            this.dataService.changeIsWarning(true);
+          } else {
+            this.verifyModalStatus = false;
+            this.isOpenViewTransactionModal = false;
+            this.getTransactions(
+              this.accountId,
+              this.filterType ? this.filterType : '',
+              this.orderType ? this.orderType : ''
+            )
+          }
+          this.dataService.changeToasterMessageStatus(true);
+          this.dataService.changeToasterMessage(data.message);
+          setTimeout(() => {
+            this.dataService.changeToasterMessageStatus(false);
+          }, 2500)
         }
       })
   }
 
   openAddAccountModal() {
-
+    this.dataService.sendAccountModalStatus(true);
   }
 
   openAddTransactionModal() {
@@ -111,7 +148,54 @@ export class MainPageComponent implements OnInit {
     this.isOpenViewTransactionModal = false;
   }
 
+  openVerifyModal(transactionId: any) {
+    this.verifyModalStatus = true;
+    this.deletedTransactionId = transactionId;
+  }
+
+  closeVerifyModal() {
+    this.verifyModalStatus = false;
+  }
+
   changeTransactionType(transactionType: string) {
     this.getCategories(transactionType);
+  }
+
+  filterTansaction(type: any) {
+    this.filterType = type;
+    this.getTransactions(
+      this.accountId,
+      type,
+      this.orderType ? this.orderType : null
+    );
+    if (type === 'income') {
+      this.isActiveIncomeTransactions = !this.isActiveIncomeTransactions;
+      if (!this.isActiveIncomeTransactions) this.getTransactions(this.accountId);
+      if (this.isActiveExpenseTransactions) this.isActiveExpenseTransactions = false;
+    }
+    if (type === 'expense') {
+      this.isActiveExpenseTransactions = !this.isActiveExpenseTransactions
+      if (!this.isActiveExpenseTransactions) this.getTransactions(this.accountId);
+      if (this.isActiveIncomeTransactions) this.isActiveIncomeTransactions = false;
+    }
+  }
+
+  searchTansaction(searchedText: any) {
+    this.getTransactions(
+      this.accountId,
+      this.filterType ? this.filterType : '',
+      this.orderType ? this.orderType : '',
+      searchedText
+    )
+  }
+
+  orderTransactions(orderType: any) {
+    this.orderType = orderType
+    this.orderedStatus = !this.orderedStatus;
+    this.getTransactions(
+      this.accountId,
+      this.filterType ? this.filterType : null,
+      orderType
+    );
   }
 }

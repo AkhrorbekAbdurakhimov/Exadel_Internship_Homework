@@ -4,7 +4,7 @@
   position: relative;
 
   .top-wrapper {
-    .income-category, .expense-category, .add-account, .add-transaction {
+    .income-transaction, .expense-transaction, .add-account, .add-transaction {
       color: pointer;
       display: flex;
       align-items: center;
@@ -37,7 +37,7 @@
       }
     }
 
-    .income-category, .expense-category {
+    .income-transaction, .expense-transaction {
       background: #F9F9F9;
       margin-bottom: 15px;
 
@@ -57,16 +57,20 @@
       }
     }
 
-    .income-category {
+    .income-transaction {
       .icon-wrapper {
         background-color: green;
       }
     }
 
-    .expense-category {
+    .expense-transaction {
       .icon-wrapper {
         background-color: red;
       }
+    }
+
+    .active {
+      border: 2px solid #000;
     }
 
     .add-account, .add-transaction {

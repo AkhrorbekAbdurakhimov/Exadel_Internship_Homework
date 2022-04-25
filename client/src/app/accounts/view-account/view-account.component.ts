@@ -13,6 +13,7 @@ export class ViewAccountComponent implements OnInit {
   @Input() account!: Account;
   @Input() isOpenViewAccountModal: boolean = false;
 
+  @Output() openVerifyModal: EventEmitter<any> = new EventEmitter();
   @Output() closeViewAccountModal: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
