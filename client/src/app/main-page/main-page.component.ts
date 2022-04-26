@@ -57,6 +57,7 @@ export class MainPageComponent implements OnInit {
     this.dataService
       .accounts
       .pipe(untilDestroyed(this))
+      
       .subscribe((accounts) => {
         if (!accounts.length) {
           this.isAddAccountStatus = false;
@@ -102,6 +103,7 @@ export class MainPageComponent implements OnInit {
           if (data.type === 'warning') {
             this.dataService.changeIsWarning(true);
           } else {
+            this.dataService.changeIsWarning(false);
             this.verifyModalStatus = false;
             this.isOpenViewTransactionModal = false;
             this.getTransactions(

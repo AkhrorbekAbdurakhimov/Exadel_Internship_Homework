@@ -7,13 +7,23 @@
       <li><a [routerLink]="['/categories']" [routerLinkActive]="'active'">Categories</a></li>
       <li><a [routerLink]="['/subscriptions']" [routerLinkActive]="'active'">Subscriptions</a></li>
       <li><a [routerLink]="['/statistics']" [routerLinkActive]="'active'">Statistics</a></li>
-      <li><a [routerLink]="['/admin']" [routerLinkActive]="'active'">Admin</a></li>
     </ul>
   </div>
   <div class="header-wrapper_profile">
     <span class="profile-name">{{fullName}}</span>
-    <button class="profile-btn">
+    <button class="profile-btn" (click)="hide = !hide">
       <mat-icon>account_circle</mat-icon>
     </button>
+  </div>
+</div>
+
+<div class="more-wrapper" [class.active]="hide">
+  <div class="profile">
+    <mat-icon>person_pin</mat-icon>
+    <span>Profile</span>
+  </div>
+  <div class="logout" (click)="logout()">
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Logout</span>
   </div>
 </div>

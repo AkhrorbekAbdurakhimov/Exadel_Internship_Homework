@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <div class="table">
+    <div class="theader">
+      <div class="trow">
+        <span class="tdata">Month</span>
+        <span class="tdata">Income</span>
+        <span class="tdata">Expenses</span>
+        <span class="tdata">Economy</span>
+        <span class="tdata">% of economy</span>
+      </div>
+    </div>
+    <div class="tbody" [ngStyle]="{'display': statistics.length ? 'block' : 'none'}">
+      <div class="trow" *ngFor="let stat of statistics">
+        <span class="tdata">{{stat.title}}</span>
+        <span class="tdata">{{stat.income}}</span>
+        <span class="tdata">{{stat.expense}}</span>
+        <span class="tdata" [ngClass]="{'red': (+stat.income - +stat.expense) < 0}">{{+stat.income - +stat.expense}}</span>
+        <span class="tdata" [ngClass]="{'red': (+stat.income - +stat.expense) < 0 }">{{((+stat.income - +stat.expense) * 100 / +stat.income | number: '1.00') + '%'}}</span>
+      </div>
+    </div>
+    <div class="tfooter" [ngStyle]="{'display': statistics.length ? 'block' : 'none'}">
+      <div class="trow">
+        <span class="tdata">Total</span>
+        <span class="tdata">{{totalIncome}}</span>
+        <span class="tdata">{{totalExpense}}</span>
+        <span class="tdata" [ngClass]="{'red': (totalIncome - totalExpense) < 0}">{{totalIncome - totalExpense}}</span>
+        <span class="tdata" [ngClass]="{'red': (totalIncome - totalExpense) < 0}">{{((totalIncome - totalExpense) * 100 / totalIncome | number: '1.00') + '%'}}</span>
+      </div>
+      <div class="trow">
+        <span class="tdata">Average</span>
+        <span class="tdata">{{totalIncome / statistics.length | number: '1.0'}}</span>
+        <span class="tdata">{{totalExpense / statistics.length | number: '1.0'}}</span>
+        <span class="tdata" [ngClass]="{'red': (totalIncome - totalExpense) < 0}">{{totalIncome / statistics.length - totalExpense / statistics.length | number: '1.0'}}</span>
+        <span class="tdata" [ngClass]="{'red': (totalIncome - totalExpense) < 0}">{{((totalIncome / statistics.length - totalExpense / statistics.length) * 100 / (totalIncome / statistics.length) | number: '1.0') + '%'}}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -50,6 +50,7 @@ export class AddAccountComponent implements OnInit {
             this.dataService.changeToasterMessageStatus(true);
             this.dataService.changeToasterMessage(data.message);
             this.dataService.sendAccountModalStatus(false);
+            this.addAccountForm.reset();
             this.getAccounts.emit();
             setTimeout(() => {
               this.dataService.changeToasterMessageStatus(false);

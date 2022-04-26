@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -13,8 +14,10 @@ import { User } from '../../models/user.model';
 export class HeaderComponent implements OnInit {
   user!: User;
   fullName: string = 'Maksim Verenich';
+  hide: boolean = false;
 
   constructor(
+    private router: Router,
     private authservice: AuthService
   ) { }
 
@@ -23,4 +26,8 @@ export class HeaderComponent implements OnInit {
     this.fullName = this.user.firstName + ' ' + this.user.lastName
   }
 
+  logout() {
+    this.authservice.logout()
+    this.router.navigateByUrl('/login')
+  }
 }

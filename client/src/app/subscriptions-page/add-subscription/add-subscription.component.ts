@@ -69,8 +69,10 @@ export class AddSubscriptionComponent implements OnInit {
             if (data.type === 'warning') {
               this.dataService.changeIsWarning(true)
             } else {
+              this.dataService.changeIsWarning(false)
               this.getSubscriptions.emit({ accountId: this.currentAccountId });
               this.closeAddSubscriptionModal.emit();
+              this.dataService.changeGetAccountsStatus(true);
               this.addSubcriptionForm.reset();
             }
             setTimeout(() => {

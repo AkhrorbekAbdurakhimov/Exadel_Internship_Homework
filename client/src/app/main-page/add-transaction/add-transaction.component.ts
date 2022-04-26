@@ -23,7 +23,6 @@ export class AddTransactionComponent implements OnInit {
   @Input() categories: Category[] = [];
   @Input() isOpenAddTransactionModal: boolean = false;
 
-  @Output()
   @Output() getTransactions: EventEmitter<any> = new EventEmitter();
   @Output() changeTransactionType: EventEmitter<any> = new EventEmitter();
   @Output() closeAddTransactionModal: EventEmitter<any> = new EventEmitter();
@@ -80,9 +79,11 @@ export class AddTransactionComponent implements OnInit {
             } else {
               this.dataService.changeToasterMessageStatus(true);
               this.dataService.changeToasterMessage(data.message);
+              this.dataService.changeIsWarning(false);
               this.closeAddTransactionModal.emit();
               this.dataService.changeGetAccountsStatus(true);
               this.getTransactions.emit(this.accountId);
+              this.transactionForm.reset();
               setTimeout(() => {
                 this.dataService.changeToasterMessageStatus(false);
               }, 2500)
