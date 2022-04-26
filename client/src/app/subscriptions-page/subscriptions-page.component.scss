@@ -1,0 +1,22 @@
+.container {
+  padding: 30px;
+  height: 100vh;
+  background: #EFEFEF;
+
+  .wrapper {
+    display: flex;
+    height: calc(100% - 50px);
+
+    app-accounts {
+      flex: 1;
+    }
+
+    app-subscriptions-list {
+      flex: 2;
+    }
+
+    app-right-sidebar {
+      flex: 1;
+    }
+  }
+}

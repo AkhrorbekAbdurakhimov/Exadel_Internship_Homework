@@ -1,0 +1,29 @@
+<div class="container">
+  <ul class="accounts-list">
+    <p
+      [class.active]="!accounts.length"
+    >
+      No accounts added yet
+    </p>
+    <li
+      class="accounts-list_item"
+      [class.selected]="account.isSelected"
+      (click)="openViewAccountModal.emit(account.id)"
+      *ngFor="let account of accounts"
+    >
+      <h3 class="title">{{account.title}}</h3>
+      <h1 class="amount">{{account.balance}}</h1>
+      <span class="sign">{{account.currency}}</span>
+    </li>
+  </ul>
+  <div
+    class="add-account"
+    [class.active]="!accounts.length"
+    (click)="openAddAccountModal.emit()"
+  >
+    <button>
+      <mat-icon>add</mat-icon>
+    </button>
+    <span>Add Account</span>
+  </div>
+</div>

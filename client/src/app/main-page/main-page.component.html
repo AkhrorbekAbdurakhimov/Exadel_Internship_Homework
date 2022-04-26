@@ -2,7 +2,46 @@
   <app-header></app-header>
   <div class="wrapper">
     <app-accounts></app-accounts>
-    <app-main-aside></app-main-aside>
+    <app-transactions-list
+      [transactions]="transactions"
+      [orderedStatus]="orderedStatus"
+      (searchTansaction)="searchTansaction($event)"
+      (orderTransactions)="orderTransactions($event)"
+      (openViewTransactionModal)="openViewTransactionModal($event)"
+    ></app-transactions-list>
+    <app-right-sidebar
+      [isAddAccountStatus]="isAddAccountStatus"
+      [isAddTransactionStatus]="isAddTransactionStatus"
+      [isActiveIncomeTransactions]="isActiveIncomeTransactions"
+      [isActiveExpenseTransactions]="isActiveExpenseTransactions"
+      (filterTansaction)="filterTansaction($event)"
+      (openAddAccountModal)="openAddAccountModal()"
+      (openAddTransactionModal)="openAddTransactionModal()"
+    ></app-right-sidebar>
   </div>
-  <app-spinner *ngIf="isSpinnerVisible"></app-spinner>
 </div>
+
+<app-view-transaction
+  [transaction]="transaction"
+  [categories]="currentTransactionCategories"
+  [isOpenViewTransactionModal]="isOpenViewTransactionModal"
+  (openVerifyModal)="openVerifyModal($event)"
+  (closeViewTransactionModal)="closeViewTransactionModal()"
+></app-view-transaction>
+
+<app-add-transaction
+  [accountId]="accountId"
+  [categories]="categories"
+  [isOpenAddTransactionModal]="isOpenAddTransactionModal"
+  (getTransactions)="getTransactions($event)"
+  (changeTransactionType)="changeTransactionType($event)"
+  (closeAddTransactionModal)="closeAddTransactionModal()"
+></app-add-transaction>
+
+<app-verify-modal
+  [verifyModalStatus]="verifyModalStatus"
+  (closeVerifyModal)="closeVerifyModal()"
+  (deleteTransaction)="deleteTransaction()"
+></app-verify-modal>
+
+<app-toaster-message></app-toaster-message>

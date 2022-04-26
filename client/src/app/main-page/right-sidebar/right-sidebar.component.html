@@ -1,0 +1,46 @@
+<div class="wrapper">
+  <div class="wrapper">
+    <div class="top-wrapper">
+      <div
+        class="income-transaction"
+        [class.active]="isActiveIncomeTransactions"
+        (click)="filterTansaction.emit('income')"
+      >
+        <div class="icon-wrapper">
+          <mat-icon class="expense-icon">arrow_downward</mat-icon>
+        </div>
+        <span class="title">Income</span>
+      </div>
+      <div
+        class="expense-transaction"
+        [class.active]="isActiveExpenseTransactions"
+        (click)="filterTansaction.emit('expense')"
+      >
+        <div class="icon-wrapper">
+          <mat-icon class="expense-icon">arrow_upward</mat-icon>
+        </div>
+        <span class="title">Expenses</span>
+      </div>
+      <div
+        class="add-transaction"
+        (click)="openAddTransactionModal.emit()"
+        [class.add-transaction-disable]="!isAddTransactionStatus"
+      >
+        <div class="icon-wrapper">
+          <mat-icon class="plus-icon">add</mat-icon>
+        </div>
+        <span class="title">Add Transaction</span>
+      </div>
+      <div
+        class="add-account"
+        (click)="openAddAccountModal.emit()"
+        [class.add-account-active]="isAddAccountStatus"
+      >
+        <div class="icon-wrapper">
+          <mat-icon class="plus-icon">add</mat-icon>
+        </div>
+        <span class="title">Add Account</span>
+      </div>
+    </div>
+  </div>
+</div>

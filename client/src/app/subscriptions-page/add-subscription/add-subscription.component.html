@@ -1,0 +1,103 @@
+<div class="container" [class.active]="isOpenAddSubscriptionModal">
+  <div class="add-subscription-modal">
+    <div class="add-subscription-modal_header">
+      <h1>Create Subscription</h1>
+      <button
+        class="close-btn"
+        (click)="closeAddSubscriptionModal.emit(addSubcriptionForm)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="add-subscription-modal_body">
+      <form
+        class="add-subscription-modal_form"
+        [formGroup]="addSubcriptionForm"
+        (ngSubmit)="submitSubcriptionForm()"
+      >
+        <div class="form-group">
+          <label>Title *</label>
+          <input
+            type="text"
+            formControlName="title"
+            name="title"
+            [ngClass]="{errorInput: addSubcriptionForm.get('title')?.hasError('required') || addSubcriptionForm.get('title')?.hasError('maxlength')}"
+          >
+          <mat-error *ngIf="addSubcriptionForm.get('title')?.hasError('required')">Title is required</mat-error>
+          <mat-error *ngIf="addSubcriptionForm.get('title')?.hasError('maxlength')">Maximum number of characters reached</mat-error>
+        </div>
+        <div class="form-group">
+          <ng-multiselect-dropdown
+            [placeholder]="'Choose categories'"
+            [settings]="dropdownSettings"
+            [data]="categories"
+            formControlName="categories"
+            name="categories"
+            [class.errorInput]="addSubcriptionForm.get('categories')?.hasError('required')"
+          >
+          </ng-multiselect-dropdown>
+          <mat-error *ngIf="addSubcriptionForm.get('categories')?.hasError('required')">Subscription category must be selected</mat-error>
+        </div>
+        <div class="form-group">
+          <div class="amount-wrapper">
+            <label>Amount</label>
+            <input
+              type="number"
+              formControlName="amount"
+              name="amount"
+              min="0"
+              onkeyup="if(this.value < 0) { this.value = this.value * -1 }"
+              [class.errorInput]="addSubcriptionForm.get('amount')?.hasError('required')"
+            >
+          </div>
+          <mat-error *ngIf="addSubcriptionForm.get('amount')?.hasError('required')">Transaction amount must be enetered</mat-error>
+        </div>
+        <div class="form-group">
+          <div class="initial-date">
+            <label>Started Date*</label>
+            <input
+              type="date"
+              formControlName="initialDate"
+              name="initialDate"
+              [(ngModel)]="currentDate"
+              [class.errorInput]="addSubcriptionForm.get('initialDate')?.hasError('required')"
+              >
+              <mat-error *ngIf="addSubcriptionForm.get('initialDate')?.hasError('required')">initial date must be selected</mat-error>
+          </div>
+          <div class="last-date">
+            <label>Ended Date</label>
+            <input
+              type="date"
+              formControlName="lastDate"
+              name="lastDate"
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea
+            formControlName="description"
+            name="description"
+            [ngClass]="{'error-description': addSubcriptionForm.get('description')?.hasError('maxlength')}"
+          ></textarea>
+          <mat-error *ngIf="addSubcriptionForm.get('description')?.hasError('maxlength')">Maximum number of characters reached</mat-error>
+        </div>
+        <p
+          class="create-subscription-error"
+          [class.active]="addSubscriptionErrorStatus"
+        >{{addSubscriptionErrorMessage}}</p>
+        <div class="buttons-wrapper">
+          <button
+            class="cancel-btn"
+            (click)="closeAddSubscriptionModal.emit(addSubcriptionForm)"
+          >Cancel</button>
+          <button
+            class="save-btn"
+            type="submit"
+            [class.disabled]="!addSubcriptionForm.valid"
+          >Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+  <app-header></app-header>
+  <div class="wrapper">
+    <app-accounts></app-accounts>
+    <div class="stats-wrapper">
+      <app-stat-table
+        [statistics]="statistics"
+        [totalIncome]="totalIncome"
+        [totalExpense]="totalExpense"
+      ></app-stat-table>
+    </div>
+  </div>
+</div>

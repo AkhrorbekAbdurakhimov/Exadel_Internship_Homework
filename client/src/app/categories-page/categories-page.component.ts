@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { Category } from '../global-components/models/category.model';
+import { Category } from '../models/category.model';
 
-import { DataService } from './services/data.service';
+import { DataService } from '../services/data.service';
 import { CategoriesService } from './services/categories.service';
 
 @UntilDestroy()
@@ -121,38 +121,3 @@ export class CategoriesPageComponent implements OnInit {
     this.isOpenUpdateCategoryModal = false;
   }
 }
-
-// export class CategoriesPageComponent implements OnInit {
-
-//   isOpenUpdateCategoryModal: boolean = false;
-
-
-//   deleteCategory() {
-//     this.categoryService
-//       .deleteCategory(this.deletedCategoryId)
-//       .pipe(untilDestroyed(this))
-//       .subscribe({
-//         next: data => {
-//           this.isWarning = false;
-//           this.toasterMessage = data.message;
-//           this.toasterMessageStatus = true;
-//           setTimeout(() => {
-//             this.toasterMessageStatus = false;
-//             window.location.reload();
-//           }, 2500)
-//         },
-//         error: error => {
-//           this.isWarning = true;
-//           this.toasterMessage = error.error.message;
-//           this.toasterMessageStatus = true;
-//           setTimeout(() => {
-//             this.toasterMessageStatus = false;
-//           }, 2500)
-//         }
-//       })
-//   }
-
-//   openUpdateCategoryModal(category: Category) {
-//     this.isOpenUpdateCategoryModal = true;
-//   }
-// }

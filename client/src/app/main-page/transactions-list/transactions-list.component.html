@@ -1,0 +1,43 @@
+<div class="wrapper">
+  <div class="search-form">
+    <div class="search-wrapper">
+      <input type="search" placeholder="Search" #searchInput (keyup)="searchTansaction.emit(searchInput.value)">
+      <mat-icon class="search-icon">search</mat-icon>
+    </div>
+    <div class="filter-wrapper" (click)="orderTransactions.emit(orderedStatus ? 'desc' : 'asc')">
+      <mat-icon class="filter-icon">{{orderedStatus ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}</mat-icon>
+      <span>Transactions date</span>
+    </div>
+  </div>
+  <ul class="transactions-list">
+    <p
+      class="no-transactions"
+      [class.no-transactions-active]="!transactions.length"
+    >No transactions added yet</p>
+    <li
+      class="transactions-list_item"
+      *ngFor="let transaction of transactions"
+      (click)="openViewTransactionModal.emit(transaction.id)"
+    >
+      <span
+        class="category-name"
+        *ngFor="let category of transaction.categories"
+      >{{category.title}}</span>
+      <div class="details">
+        <h4 class="title">{{transaction.title}}</h4>
+        <div class="details-wrapper">
+          <span class="icon-wrapper" [class.red]="transaction.type === 'expense'">
+            <mat-icon class="category-icon">{{transaction.type === 'income' ? 'arrow_downward' : 'arrow_upward'}}</mat-icon>
+          </span>
+          <h4 class="category">{{transaction.type}}</h4>
+          <span class="dot"></span>
+          <p class="date">{{transaction.date}}</p>
+        </div>
+      </div>
+      <p class="amount" [class.red-amount]="transaction.type === 'expense'">
+        {{transaction.type === 'income' ? '' : '- '}}
+        {{transaction.amount}} {{transaction.currency}}
+      </p>
+    </li>
+  </ul>
+</div>

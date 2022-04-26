@@ -1,0 +1,30 @@
+<div class="container">
+  <app-header></app-header>
+  <div class="wrapper">
+    <app-accounts></app-accounts>
+    <app-subscriptions-list
+      [subscriptions]="subscriptions"
+      (filterSubscriptions)="filterSubscriptions($event)"
+      (openSubscriptioViewModal)="openSubscriptioViewModal($event)"
+    ></app-subscriptions-list>
+    <app-right-sidebar
+      (openAddSubscriptionModal)="openAddSubscriptionModal()"
+    ></app-right-sidebar>
+  </div>
+</div>
+
+<app-subscription-view
+  [subscription]="subscription"
+  [isOpenSubscriptionView]="isOpenSubscriptionView"
+  [currentSubscriptionCategories]="currentSubscriptionCategories"
+  (closeSubscripitonViewModal)="closeSubscripitonViewModal()"
+></app-subscription-view>
+
+<app-add-subscription
+  [currentAccountId]="accountId"
+  [isOpenAddSubscriptionModal]="isOpenAddSubscriptionModal"
+  (closeAddSubscriptionModal)="closeAddSubscriptionModal($event)"
+  (getSubscriptions)="getSubscriptions($event)"
+></app-add-subscription>
+
+<app-toaster-message></app-toaster-message>

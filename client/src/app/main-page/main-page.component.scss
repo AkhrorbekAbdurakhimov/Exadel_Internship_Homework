@@ -12,8 +12,12 @@
       flex: 1;
     }
 
-    app-main-aside {
-      flex: 3;
+    app-transactions-list {
+      flex: 2;
+    }
+
+    app-right-sidebar {
+      flex: 1;
     }
   }
 }

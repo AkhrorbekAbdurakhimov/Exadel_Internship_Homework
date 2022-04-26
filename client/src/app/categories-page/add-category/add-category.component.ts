@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { DataService } from '../services/data.service';
+import { DataService } from 'src/app/services/data.service';
 import { CategoriesService } from '../services/categories.service';
 
 @UntilDestroy()
@@ -50,7 +50,7 @@ export class AddCategoryComponent implements OnInit {
             this.dataService.changeToasterMessageStatus(true);
             this.dataService.changeToasterMessage(data.message);
             this.closeAddCategoryModal.emit();
-            this.getCategories.emit()
+            this.getCategories.emit();
             setTimeout(() => {
               this.dataService.changeToasterMessageStatus(false);
             }, 2500)

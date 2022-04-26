@@ -1,0 +1,57 @@
+<div class="container" [class.active]="isOpenViewTransactionModal">
+  <div class="view-transaction" [class.active]="isOpenViewTransactionModal">
+    <div class="view-transaction_header">
+      <span>Transaction Information</span>
+      <button class="edit-btn">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="delete-btn" (click)="openVerifyModal.emit(transaction.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        class="close-btn"
+        (click)="closeViewTransactionModal.emit()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="view-transaction_body">
+      <div class="top">
+        <span class="top-icon-wrappper"
+          [ngStyle]="{'background-color': transaction && transaction.type === 'expense' ? 'red' : 'green'}"
+        >
+          <mat-icon>
+            {{transaction && transaction.type === 'expense' ? 'arrow_upward' : 'arrow_downward'}}
+          </mat-icon>
+        </span>
+        <span class="type">{{transaction && transaction.type ? transaction.type : ''}}</span>
+        <span
+          class="amount"
+          [ngStyle]="{'color': transaction && transaction.type === 'expense' ? 'red' : 'green'}"
+        >
+          {{transaction && transaction.type === 'expense' ? ' - ' : ''}}
+          {{transaction && transaction.amount ? transaction.amount : ''}}
+          {{transaction && transaction.currency ? transaction.currency : ''}}
+        </span>
+      </div>
+      <p class="transaction-title">{{transaction && transaction.title ? transaction.title : ''}}</p>
+      <button
+        class="category"
+        *ngFor="let category of categories"
+      >{{category && category.title ? category.title : ''}}</button>
+      <div class="details-wrapper">
+        <div class="details-wrapper_item">
+          <span>Payment Date:</span>
+          <span>{{transaction && transaction.date ? transaction.date : ''}}</span>
+        </div>
+        <div class="details-wrapper_item">
+          <span>Description:</span>
+          <span>{{transaction && transaction.description ? transaction.description : ''}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="view-transaction_footer">
+      <button (click)="closeViewTransactionModal.emit()">close</button>
+    </div>
+  </div>
+</div>

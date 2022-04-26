@@ -1,12 +1,11 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
-import { filter, tap, catchError } from 'rxjs/operators';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 
 import { AuthService } from './services/auth.service';
-import { SpinnerService } from '../global-components/services/spinner.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,11 +13,9 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private authservice: AuthService,
-    private spinnerService: SpinnerService
   ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.spinnerService.showSpinner()
     if (this.authservice.isLoggedIn()) {
       const token = this.authservice.getToken();
       if (token && this.isTokenExpired(token)) {
@@ -36,13 +33,8 @@ export class AuthInterceptor implements HttpInterceptor {
       .handle(request)
       .pipe(
         catchError((err: HttpErrorResponse) => {
-          this.spinnerService.hideSpinner();
           return throwError(() => err)
         })
-      )
-      .pipe(
-        filter((event: any) => event instanceof HttpResponse),
-        tap(() => this.spinnerService.hideSpinner())
       )
   }
 

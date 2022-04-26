@@ -1,0 +1,108 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.433);
+  z-index: 10;
+  display: none;
+
+  .view-account {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    padding: 30px;
+    transform: translateX(100%);
+
+    &_header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      span {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 41px;
+        color: #373737;
+        margin-right: auto;
+      }
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+    }
+
+    &_body {
+
+      p {
+        padding: 10px 0;
+        display: flex;
+        border-bottom: 1.5px solid #333333;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        span:first-child {
+          font-family: 'Space Grotesk';
+          width: 40%;
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          color: #373737;
+        }
+
+        span:last-child {
+          font-family: 'Space Grotesk';
+          width: 60%;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          color: #373737;
+        }
+      }
+    }
+
+    &_footer {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+
+      button {
+        font-family: 'Space Grotesk';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 26px;
+        color: #373737;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+    }
+  }
+
+  .active {
+    transform: translateX(0);
+    transition: transform 1s ease;
+  }
+}
+
+.active {
+  display: block;
+}
+
